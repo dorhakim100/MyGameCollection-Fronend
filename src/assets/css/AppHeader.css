@@ -1,0 +1,12 @@
+.app-header{
+    position: absolute;
+    top: 0px;
+    left: 25px;
+    right: 25px;
+    margin: auto 0;
+}
+
+.app-nav{
+    display: flex;
+    justify-content: space-between;
+}
