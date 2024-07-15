@@ -30,6 +30,10 @@ export function GameIndex() {
                 <div className='game-name-container'>
                   <h3 className='game-name'>{game.name}</h3>
                 </div>
+                {!game.inStock && (
+                  <span className='unavailable'>UNAVAILABLE</span>
+                )}
+
                 <img className='game-cover' src={gameCover} alt='' />
               </Link>
             </div>

@@ -1,3 +1,18 @@
 .labels-container>span{
 padding: 5px;
 }
+
+.unavailable{
+    background-color: var(--high-importance);
+    color: var(--text);
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--mid-importance);
+
+    position: absolute;
+    rotate: 10deg;
+}
+
+.game-details-cover{
+    width: 250px;
+}
