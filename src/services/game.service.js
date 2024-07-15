@@ -67,7 +67,7 @@ function getRandomgame() {
 }
 
 function getDefaultFilter() {
-  return { txt: '', maxPrice: '' }
+  return { txt: '', maxPrice: '', labels: [], inStock: 'all', company: 'all' }
 }
 
 // TEST DATA
