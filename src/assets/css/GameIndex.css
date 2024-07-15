@@ -1,6 +1,9 @@
 .games-container{
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
+    max-width: 1280px;
+    margin: 0 auto;
+    
+    display: flex;
+    flex-wrap: wrap;
 
     gap: 25px;
 
@@ -21,7 +24,7 @@
 
 .hover-shadow{
     height: auto;
-    height: 230px;
+    height: fit-content;
     width: 150px;
     background-color: var(--hover-shadow);
     background-color: rgba(0, 0, 0, 0.467);
@@ -32,7 +35,9 @@
     opacity: 0;
     transition: 0.3s;
 }
-
+.hover-shadow>.game-cover{
+    opacity: 0;
+}
 .game-container:hover .hover-shadow{
     opacity: 1;
 }

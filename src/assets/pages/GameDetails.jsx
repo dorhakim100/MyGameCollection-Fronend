@@ -34,7 +34,7 @@ export function GameDetails() {
   return (
     <section className='section-container'>
       {!game.inStock && <span className='unavailable'>UNAVAILABLE</span>}
-      <img className='game-details-cover' src={gameCover} alt='' />
+      <img className='game-details-cover' src={game.cover} alt='' />
       <h2>{game.name}</h2>
       <h3>{game.price}$</h3>
       <h3>Categories:</h3>

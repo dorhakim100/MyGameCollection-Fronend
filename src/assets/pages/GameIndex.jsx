@@ -37,15 +37,17 @@ export function GameIndex() {
           return (
             <div key={game._id} className='game-container'>
               <Link to={`/game/${game._id}`}>
-                <div className='hover-shadow'></div>
                 <div className='game-name-container'>
                   <h3 className='game-name'>{game.name}</h3>
                 </div>
                 {!game.inStock && (
                   <span className='unavailable'>UNAVAILABLE</span>
                 )}
+                <div className='hover-shadow'>
+                  <img className='game-cover' src={game.cover} alt='' />
+                </div>
 
-                <img className='game-cover' src={gameCover} alt='' />
+                <img className='game-cover' src={game.cover} alt='' />
               </Link>
             </div>
           )

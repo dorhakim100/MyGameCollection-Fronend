@@ -83,7 +83,8 @@ function createDemoData() {
       createdAt: 1631031801011,
       inStock: true,
       company: 'Nintendo',
-      cover: 'https://example.com/covers/pokemon_gold.jpg',
+      cover:
+        'https://m.media-amazon.com/images/I/61X24yubIHL._AC_UF1000,1000_QL80_.jpg',
     },
     {
       _id: 't102',
@@ -93,7 +94,8 @@ function createDemoData() {
       createdAt: 1631132802011,
       inStock: true,
       company: 'Nintendo',
-      cover: 'https://example.com/covers/zelda_botw.jpg',
+      cover:
+        'https://m.media-amazon.com/images/I/81KGsbq8ekL._AC_UF1000,1000_QL80_.jpg',
     },
     {
       _id: 't103',
@@ -103,17 +105,18 @@ function createDemoData() {
       createdAt: 1631233803011,
       inStock: false,
       company: 'Nintendo',
-      cover: 'https://example.com/covers/super_mario_odyssey.jpg',
+      cover: 'https://m.media-amazon.com/images/I/91SF0Tzmv4L.jpg',
     },
     {
       _id: 't104',
-      name: 'Minecraft',
+      name: `Pokemon Let's Go Pikachu`,
       price: 30,
-      labels: ['Sandbox', 'Survival'],
+      labels: ['Adventure', 'RPG'],
       createdAt: 1631334804011,
       inStock: true,
-      company: ['Microsoft', 'Sony', 'Nintendo'],
-      cover: 'https://example.com/covers/minecraft.jpg',
+      company: ['Nintendo'],
+      cover:
+        'https://m.media-amazon.com/images/I/71w18E60zzL._AC_UF1000,1000_QL80_.jpg',
     },
     {
       _id: 't105',
@@ -123,17 +126,19 @@ function createDemoData() {
       createdAt: 1631435805011,
       inStock: true,
       company: ['Microsoft', 'Sony', 'Nintendo'],
-      cover: 'https://example.com/covers/fortnite.jpg',
+      cover:
+        'https://m.media-amazon.com/images/M/MV5BNzU2YTY2OTgtZGZjZi00MTAyLThlYjUtMWM5ZmYzOGEyOWJhXkEyXkFqcGdeQXVyNTgyNTA4MjM@._V1_FMjpg_UX1000_.jpg',
     },
     {
       _id: 't106',
-      name: 'Call of Duty: Modern Warfare',
+      name: 'Call of Duty: Modern Warfare REMASTERED',
       price: 60,
       labels: ['Shooter', 'Action'],
       createdAt: 1631536806011,
       inStock: false,
       company: ['Microsoft', 'Sony'],
-      cover: 'https://example.com/covers/cod_modern_warfare.jpg',
+      cover:
+        'https://upload.wikimedia.org/wikipedia/en/d/d4/Call_of_Duty_-_Modern_Warfare_Remastered.jpeg',
     },
     {
       _id: 't107',
@@ -143,7 +148,8 @@ function createDemoData() {
       createdAt: 1631637807011,
       inStock: true,
       company: 'Nintendo',
-      cover: 'https://example.com/covers/animal_crossing_nh.jpg',
+      cover:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcSC-Jwca7M-Svlw1C49HwQsNa5QscJqSrcw&s',
     },
     {
       _id: 't108',
@@ -153,7 +159,8 @@ function createDemoData() {
       createdAt: 1631738808011,
       inStock: true,
       company: 'Nintendo',
-      cover: 'https://example.com/covers/among_us.jpg',
+      cover:
+        'https://upload.wikimedia.org/wikipedia/en/9/9a/Among_Us_cover_art.jpg',
     },
     {
       _id: 't109',
@@ -163,7 +170,8 @@ function createDemoData() {
       createdAt: 1631839809011,
       inStock: false,
       company: ['Nintendo', 'Sony', 'Microsoft'],
-      cover: 'https://example.com/covers/hades.jpg',
+      cover:
+        'https://upload.wikimedia.org/wikipedia/en/c/cc/Hades_cover_art.jpg',
     },
     {
       _id: 't110',
@@ -173,7 +181,8 @@ function createDemoData() {
       createdAt: 1631940810011,
       inStock: true,
       company: ['Sony', 'Microsoft'],
-      cover: 'https://example.com/covers/cyberpunk_2077.jpg',
+      cover:
+        'https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_box_art.jpg',
     },
     {
       _id: 't111',
@@ -183,7 +192,8 @@ function createDemoData() {
       createdAt: 1632041811011,
       inStock: true,
       company: 'Sony',
-      cover: 'https://example.com/covers/spiderman_miles_morales.jpg',
+      cover:
+        'https://image.api.playstation.com/vulcan/ap/rnd/202008/1020/PRfYtTZQsuj3ALrBXGL8MjAH.jpg',
     },
     {
       _id: 't112',
@@ -193,17 +203,18 @@ function createDemoData() {
       createdAt: 1632142812011,
       inStock: true,
       company: 'Microsoft',
-      cover: 'https://example.com/covers/halo_infinite.jpg',
+      cover: 'https://upload.wikimedia.org/wikipedia/en/1/14/Halo_Infinite.png',
     },
     {
       _id: 't113',
-      name: 'The Last of Us Part II',
+      name: 'The Last of Us Part II REMASTERED',
       price: 60,
       labels: ['Action', 'Adventure'],
       createdAt: 1632243813011,
       inStock: false,
       company: 'Sony',
-      cover: 'https://example.com/covers/last_of_us_2.jpg',
+      cover:
+        'https://m.media-amazon.com/images/I/818m9WGY0lL._AC_UF1000,1000_QL80_.jpg',
     },
     {
       _id: 't114',
@@ -213,7 +224,8 @@ function createDemoData() {
       createdAt: 1632344814011,
       inStock: true,
       company: 'Sony',
-      cover: 'https://example.com/covers/ghost_of_tsushima.jpg',
+      cover:
+        'https://upload.wikimedia.org/wikipedia/en/b/b6/Ghost_of_Tsushima.jpg',
     },
     {
       _id: 't115',
@@ -223,7 +235,8 @@ function createDemoData() {
       createdAt: 1632445815011,
       inStock: true,
       company: 'Microsoft',
-      cover: 'https://example.com/covers/gears_5.jpg',
+      cover:
+        'https://store-images.s-microsoft.com/image/apps.10933.65494054591008504.4eae27ba-1cfe-4af2-950a-4af81f8cd22a.b5b2909d-8884-48d0-b25a-68d6518c9b73',
     },
     {
       _id: 't116',
@@ -233,7 +246,8 @@ function createDemoData() {
       createdAt: 1632546816011,
       inStock: true,
       company: 'Nintendo',
-      cover: 'https://example.com/covers/super_smash_bros_ultimate.jpg',
+      cover:
+        'https://m.media-amazon.com/images/I/81aJ-R4E6gL._AC_UF1000,1000_QL80_.jpg',
     },
     {
       _id: 't117',
@@ -243,7 +257,8 @@ function createDemoData() {
       createdAt: 1632647817011,
       inStock: false,
       company: 'Nintendo',
-      cover: 'https://example.com/covers/mario_kart_8_deluxe.jpg',
+      cover:
+        'https://m.media-amazon.com/images/I/51uY0eZg+IS._SY445_SX342_.jpg',
     },
   ]
   return games
