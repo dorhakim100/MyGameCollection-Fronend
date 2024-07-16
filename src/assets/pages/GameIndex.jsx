@@ -11,6 +11,7 @@ import { GamesList } from './GamesList.jsx'
 
 import { setFilterBy } from '../../store/actions/game.actions.js'
 import { setIsLoadingFalse } from '../../store/actions/game.actions.js'
+import { utilService } from '../../services/util.service.js'
 
 import gameCover from '/game-cover.jpg'
 

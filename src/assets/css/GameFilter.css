@@ -28,6 +28,7 @@
     border: solid 2px var(--text);
 
     position: fixed;
+    top: 200px;
     inset-inline-start: -400px;
 
     width: 350px;

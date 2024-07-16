@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 
 import { setFilterBy } from '../../store/actions/game.actions.js'
+import { utilService } from '../../services/util.service.js'
 
 import '../css/GameFilter.css'
 
@@ -27,6 +28,7 @@ export function GameFilter({ filterBy }) {
   const [isStock, setIsStock] = useState(false)
 
   const [onFilterBy, setOnFilterBy] = useState(filterBy)
+  const debouncedSetFilter = useRef(utilService.debounce(setOnFilterBy, 500))
 
   //   const isCheckRef = useRef()
 
@@ -51,6 +53,66 @@ export function GameFilter({ filterBy }) {
     setIsStock(currentOnlyIsStock)
   }
 
+  function handleChange({ target }) {
+    const field = target.name
+    let value = target.value
+    let checkedButton = target.id
+
+    switch (target.type) {
+      case 'number':
+      case 'range':
+        value = +value || ''
+        break
+
+      case 'checkbox':
+        if (field === 'companies') {
+          if (filterBy.companies.includes(checkedButton)) {
+            const idx = onFilterBy.companies.findIndex(
+              (company) => company === checkedButton
+            )
+            onFilterBy.companies.splice(idx, 1)
+          } else {
+            onFilterBy.companies.push(checkedButton)
+          }
+          setOnFilterBy({ ...onFilterBy })
+        }
+        if (field === 'labels') {
+          if (filterBy.labels.includes(checkedButton)) {
+            const idx = onFilterBy.labels.findIndex(
+              (label) => label === checkedButton
+            )
+            onFilterBy.labels.splice(idx, 1)
+          } else {
+            onFilterBy.labels.push(checkedButton)
+          }
+          setOnFilterBy({ ...onFilterBy })
+        }
+        return
+        break
+
+      default:
+        break
+    }
+    console.log(field)
+    console.log(value)
+
+    debouncedSetFilter.current((prevFilter) => ({
+      ...prevFilter,
+      [field]: value,
+    }))
+  }
+
+  function onClearFilter() {
+    setOnFilterBy({
+      ...onFilterBy,
+      txt: '',
+      maxPrice: '',
+      labels: [],
+      inStock: 'all',
+      companies: [],
+    })
+  }
+
   return (
     <div className='filtering-container'>
       <button
@@ -72,14 +134,21 @@ export function GameFilter({ filterBy }) {
         <button className='x-button' onClick={() => onSetIsFiltering()}>
           X
         </button>
-        <h3>Filter</h3>
+        <button onClick={onClearFilter}>Clear Filter</button>
         <div className='text-container'>
           <label htmlFor='name'>Game Title:</label>
-          <input type='search' id='name' />
+          <input onChange={handleChange} type='search' id='name' name='txt' />
         </div>
         <div className='price-container'>
           <label htmlFor='price'>Max Price</label>
-          <input type='range' id='price' min={1} max={150} />
+          <input
+            onChange={handleChange}
+            type='range'
+            id='price'
+            min={1}
+            max={150}
+            name='maxPrice'
+          />
         </div>
         <div className='in-stock-container'>
           <label htmlFor='stock'>Only In Stock</label>
@@ -97,7 +166,12 @@ export function GameFilter({ filterBy }) {
             return (
               <div className='transparent-checkbox company-container'>
                 <label htmlFor={company}>{company}</label>
-                <input type='checkbox' name='' id={company} />
+                <input
+                  onChange={handleChange}
+                  type='checkbox'
+                  name='companies'
+                  id={company}
+                />
               </div>
             )
           })}
@@ -108,7 +182,12 @@ export function GameFilter({ filterBy }) {
             return (
               <div className='transparent-checkbox label-container'>
                 <label htmlFor={label}>{label}</label>
-                <input type='checkbox' name='' id={label} />
+                <input
+                  onChange={handleChange}
+                  type='checkbox'
+                  name='labels'
+                  id={label}
+                />
               </div>
             )
           })}
