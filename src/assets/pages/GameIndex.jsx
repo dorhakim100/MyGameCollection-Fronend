@@ -52,27 +52,29 @@ export function GameIndex() {
     <section className='section-container'>
       <div className='game-index-user-interface'>
         <GameFilter filterBy={filterBy} onSetFilter={onSetFilter} />
-        <h2>My Games</h2>
-
+        {/* <h2>My Games</h2> */}
+        <div>
+          <label htmlFor='sortBy'>Sort By:</label>
+          <input
+            onChange={onSort}
+            list='sortOptions'
+            name='sortOption'
+            id='sortOption'
+          />
+          <datalist id='sortOptions'>
+            <option>Name Descending</option>
+            <option>Name Ascending</option>
+            <option>Price Descending</option>
+            <option>Price Ascending</option>
+            <option>Time Descending</option>
+            <option>Time Ascending</option>
+          </datalist>
+        </div>
         <Link to={`/game/edit`}>
           <button>Add Game</button>
         </Link>
       </div>
-      <label htmlFor='sortBy'>Sort By</label>
-      <input
-        onChange={onSort}
-        list='sortOptions'
-        name='sortOption'
-        id='sortOption'
-      />
-      <datalist id='sortOptions'>
-        <option>Name Descending</option>
-        <option>Name Ascending</option>
-        <option>Price Descending</option>
-        <option>Price Ascending</option>
-        <option>Time Descending</option>
-        <option>Time Ascending</option>
-      </datalist>
+
       {!isLoading && <GamesList games={games} />}
 
       <div className='page-container'>

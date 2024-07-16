@@ -34,10 +34,17 @@ export function GameDetails() {
       })
   }
   return (
-    <section className='section-container'>
-      <Link to={`/game`} className='back-button'>
-        Back
-      </Link>
+    <section className='section-container game-details'>
+      <div className='buttons-container'>
+        <button>
+          <Link to={`/game`} className='back-button'>
+            Back
+          </Link>
+        </button>
+        <button>
+          <Link to={`/game/edit/${game._id}`}>Edit</Link>
+        </button>
+      </div>
       {!game.inStock && <span className='unavailable'>OUT OF STOCK</span>}
       <img className='game-details-cover' src={game.cover} alt='' />
       <h2>{game.name}</h2>
@@ -52,7 +59,10 @@ export function GameDetails() {
           return <span key={label}>{label}</span>
         })}
       </div>
-      <Link to={`/game/edit/${game._id}`}>Edit</Link>
+      <div className='nav-buttons-container'>
+        <button>Previous</button>
+        <button>Next</button>
+      </div>
     </section>
   )
 }

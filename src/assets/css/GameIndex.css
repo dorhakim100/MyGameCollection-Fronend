@@ -1,9 +1,16 @@
+
+
 .game-index-user-interface{
     display: flex;
     justify-items: center;
     align-items: center;
 
     justify-content: space-around;
+
+    position: absolute;
+    top: 250px;
+    left: 0px;
+    right: 0px;
 }
 
 .games-container{
@@ -94,4 +101,9 @@
     align-items: center;
     justify-items: center;
     justify-content: space-around;
+
+    position: absolute;
+    bottom: 3em;
+    left: 0;
+    right: 0;
 }
