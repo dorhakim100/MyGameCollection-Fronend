@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 
 import { useEffect, useState } from 'react'
 
 import { gameService } from '../../services/game.service.js'
+import { saveGame } from '../../store/actions/game.actions.js'
+import { loadGames } from '../../store/actions/game.actions.js'
 
 import '../css/GameEdit.css'
 
@@ -29,9 +31,14 @@ export function GameEdit() {
   const companies = ['Sony', 'Nintendo', 'Microsoft']
 
   const params = useParams()
+  const navigate = useNavigate()
 
   const [game, setGame] = useState({ labels: [], companies: [] })
   const [editGame, setEditGame] = useState(game)
+
+  const filterBy = useSelector(
+    (selectorState) => selectorState.gameModule.filterBy
+  )
 
   useEffect(() => {
     console.log(game)
@@ -101,12 +108,29 @@ export function GameEdit() {
     setEditGame({ ...editGame, [field]: value })
   }
 
+  function onSaveGame(ev) {
+    ev.preventDefault()
+    const { name, price, labels, companies } = editGame
+    // todoService.save(todoToEdit)
+    saveGame(editGame)
+      .then((savedTodo) => {
+        console.log(savedTodo)
+        loadGames(filterBy).then(() => {
+          navigate(`/game/${game._id}`)
+        })
+      })
+      .catch((err) => {
+        showErrorMsg('Cannot save todo')
+        console.log('err:', err)
+      })
+  }
+
   return (
     <section className='section-container'>
       {/* {game && <h2>Edit{` - ${game.name}`}</h2>} */}
       {game && <img src={game.cover} alt='' className='game-cover-edit' />}
 
-      <form action='' className='game-edit-form'>
+      <form action='' className='game-edit-form' onSubmit={onSaveGame}>
         <div>
           <label htmlFor=''>Game Title:</label>
           <input
