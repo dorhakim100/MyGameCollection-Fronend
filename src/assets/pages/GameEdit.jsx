@@ -31,6 +31,7 @@ export function GameEdit() {
   const params = useParams()
 
   const [game, setGame] = useState({ labels: [], companies: [] })
+  const [editGame, setEditGame] = useState(game)
 
   useEffect(() => {
     console.log(game)
@@ -41,7 +42,7 @@ export function GameEdit() {
     gameService
       .getById(params.gameId)
       .then((game) => {
-        console.log(game)
+        setEditGame({ ...game })
         setGame({ ...game })
       })
       .catch((err) => {
@@ -50,6 +51,56 @@ export function GameEdit() {
         navigate('/game')
       })
   }
+
+  function handleChange({ target }) {
+    const field = target.name
+    let value = target.value
+    let checkedButton = target.id
+
+    let newCompanies = []
+    let newLabels = []
+
+    switch (target.type) {
+      case 'number':
+      case 'range':
+        value = +value || ''
+        break
+
+      case 'checkbox':
+        if (field === 'companies') {
+          if (editGame.companies.includes(checkedButton)) {
+            const idx = editGame.companies.findIndex(
+              (company) => company === checkedButton
+            )
+            editGame.companies.splice(idx, 1)
+            newCompanies = editGame.companies
+          } else {
+            newCompanies = editGame.companies.push(checkedButton)
+          }
+          setEditGame({ ...editGame, newCompanies })
+        }
+        if (field === 'labels') {
+          if (editGame.labels.includes(checkedButton)) {
+            const idx = editGame.labels.findIndex(
+              (label) => label === checkedButton
+            )
+            editGame.labels.splice(idx, 1)
+            newLabels = editGame.labels
+          } else {
+            newLabels = editGame.labels.push(checkedButton)
+          }
+          setEditGame({ ...editGame, newLabels })
+        }
+        return
+        break
+
+      default:
+        break
+    }
+
+    setEditGame({ ...editGame, [field]: value })
+  }
+
   return (
     <section className='section-container'>
       {/* {game && <h2>Edit{` - ${game.name}`}</h2>} */}
@@ -58,11 +109,23 @@ export function GameEdit() {
       <form action='' className='game-edit-form'>
         <div>
           <label htmlFor=''>Game Title:</label>
-          <input type='text' value={game.name} style={{ width: 200 }} />
+          <input
+            onChange={handleChange}
+            name='name'
+            type='text'
+            value={editGame.name}
+            style={{ width: 200 }}
+          />
         </div>
         <div>
           <label htmlFor=''>Game Price:</label>
-          <input type='number' value={game.price} style={{ width: 50 }} />
+          <input
+            name='price'
+            onChange={handleChange}
+            type='number'
+            value={editGame.price}
+            style={{ width: 50 }}
+          />
           <span>$</span>
         </div>
         <label htmlFor=''>Companies:</label>
@@ -73,8 +136,9 @@ export function GameEdit() {
                 <div className='transparent-checkbox company-container'>
                   <label htmlFor={company}>{company}</label>
                   <input
+                    onChange={handleChange}
                     type='checkbox'
-                    checked={game.companies.includes(company)}
+                    checked={editGame.companies.includes(company)}
                     name='companies'
                     id={company}
                   />
@@ -91,7 +155,8 @@ export function GameEdit() {
                 <div className='transparent-checkbox label-container'>
                   <label htmlFor={label}>{label}</label>
                   <input
-                    checked={game.labels.includes(label)}
+                    onChange={handleChange}
+                    checked={editGame.labels.includes(label)}
                     type='checkbox'
                     name='labels'
                     id={label}
