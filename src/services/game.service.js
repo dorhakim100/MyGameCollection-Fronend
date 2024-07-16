@@ -3,6 +3,7 @@ import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
 
 const STORAGE_KEY = 'gameDB'
+const PAGE_SIZE = 6
 
 // localStorage.clear()
 
@@ -57,6 +58,13 @@ function query(filterBy = {}) {
     } else {
       filterBy.labels = []
     }
+    if (filterBy.pageIdx === null) {
+      return games
+    } else {
+      const startIdx = filterBy.pageIdx * PAGE_SIZE
+      games = games.slice(startIdx, startIdx + PAGE_SIZE)
+      return games
+    }
     return games
     // return games.filter(
     // (game) => regExp.test(game.vendor) && game.price <= filterBy.maxPrice
@@ -98,7 +106,15 @@ function getRandomgame() {
 }
 
 function getDefaultFilter() {
-  return { txt: '', maxPrice: '', labels: [], inStock: 'all', companies: [] }
+  return {
+    txt: '',
+    maxPrice: '',
+    labels: [],
+    inStock: 'all',
+    companies: [],
+    sortBy: '',
+    pageIdx: 0,
+  }
 }
 
 // TEST DATA

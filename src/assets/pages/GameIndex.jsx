@@ -36,15 +36,30 @@ export function GameIndex() {
     setFilterBy(filterBy)
   }
 
+  function onChangePageIdx(diff) {
+    if (filterBy.pageIdx === 0 && diff === -1) return
+    const newPageIdx = filterBy.pageIdx + diff
+    setFilterBy({ ...filterBy, pageIdx: newPageIdx })
+  }
+
   return (
     <section className='section-container'>
       <div className='game-index-user-interface'>
         <GameFilter filterBy={filterBy} onSetFilter={onSetFilter} />
         <h2>My Games</h2>
+
         <Link to={`/game/edit`}>
           <button>Add Game</button>
         </Link>
       </div>
+      <label htmlFor='sortBy'>Sort By</label>
+      <input list='sortOptions' name='sortOption' id='sortOption' />
+      <datalist id='sortOptions'>
+        <option>Name Descending</option>
+        <option>Name Ascending</option>
+        <option>Time Descending</option>
+        <option>Time Ascending</option>
+      </datalist>
       {!isLoading && <GamesList games={games} />}
       {/* <div className='games-container'>
         {games.map((game) => {
@@ -67,6 +82,11 @@ export function GameIndex() {
           )
         })}
       </div> */}
+      <div className='page-container'>
+        <button onClick={() => onChangePageIdx(-1)}>Previous</button>
+        <span>{filterBy.pageIdx + 1}</span>
+        <button onClick={() => onChangePageIdx(1)}>Next</button>
+      </div>
     </section>
   )
 }

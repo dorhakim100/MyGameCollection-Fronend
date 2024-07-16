@@ -88,3 +88,10 @@
     width: 150px;
     z-index: 0;
 }
+
+.page-container{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: space-around;
+}

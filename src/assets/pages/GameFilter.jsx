@@ -42,13 +42,11 @@ export function GameFilter({ filterBy }) {
   }
 
   function onIsSetStock() {
-    console.log(isStock)
     const currentOnlyIsStock = !isStock
     if (currentOnlyIsStock) {
-      console.log('works')
-      setOnFilterBy({ ...onFilterBy, inStock: 'onlyInStock' })
+      setOnFilterBy({ ...onFilterBy, inStock: 'onlyInStock', pageIdx: 0 })
     } else {
-      setOnFilterBy({ ...onFilterBy, inStock: 'all' })
+      setOnFilterBy({ ...onFilterBy, inStock: 'all', pageIdx: 0 })
     }
     setIsStock(currentOnlyIsStock)
   }
@@ -74,7 +72,7 @@ export function GameFilter({ filterBy }) {
           } else {
             onFilterBy.companies.push(checkedButton)
           }
-          setOnFilterBy({ ...onFilterBy })
+          setOnFilterBy({ ...onFilterBy, pageIdx: 0 })
         }
         if (field === 'labels') {
           if (filterBy.labels.includes(checkedButton)) {
@@ -85,7 +83,7 @@ export function GameFilter({ filterBy }) {
           } else {
             onFilterBy.labels.push(checkedButton)
           }
-          setOnFilterBy({ ...onFilterBy })
+          setOnFilterBy({ ...onFilterBy, pageIdx: 0 })
         }
         return
         break
@@ -99,6 +97,7 @@ export function GameFilter({ filterBy }) {
     debouncedSetFilter.current((prevFilter) => ({
       ...prevFilter,
       [field]: value,
+      pageIdx: 0,
     }))
   }
 
