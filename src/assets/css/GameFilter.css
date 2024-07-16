@@ -15,7 +15,7 @@
 
 .is-filtering-button:hover{
     cursor: pointer;
-    background-color: var(--green);
+    /* background-color: var(--green); */
 }
 
 
@@ -43,7 +43,7 @@
 }
 .x-button:hover{
     cursor: pointer;
-    background-color: var(--green);
+    background-color: var(--red);
 }
 
 .text-container{

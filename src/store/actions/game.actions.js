@@ -17,7 +17,6 @@ export function loadGames() {
   return gameService
     .query(filterBy)
     .then((games) => {
-      console.log(games)
       store.dispatch({ type: SET_GAMES, games })
     })
     .catch((err) => {

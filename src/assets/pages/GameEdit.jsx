@@ -66,6 +66,7 @@ export function GameEdit() {
 
     let newCompanies = []
     let newLabels = []
+    console.log(field)
 
     switch (target.type) {
       case 'number':
@@ -98,6 +99,10 @@ export function GameEdit() {
           }
           setEditGame({ ...editGame, newLabels })
         }
+        if (field === 'inStock') {
+          editGame.inStock = target.checked
+          setEditGame({ ...editGame })
+        }
         return
         break
 
@@ -111,12 +116,16 @@ export function GameEdit() {
   function onSaveGame(ev) {
     ev.preventDefault()
     const { name, price, labels, companies } = editGame
+    if (!editGame.cover) {
+      editGame.cover =
+        'https://vglist.co/packs/media/images/no-cover-369ad8f0ea82dde5923c942ba1a26482.png'
+    }
     // todoService.save(todoToEdit)
     saveGame(editGame)
       .then((savedTodo) => {
         console.log(savedTodo)
         loadGames(filterBy).then(() => {
-          navigate(`/game/${game._id}`)
+          navigate(`/game`)
         })
       })
       .catch((err) => {
@@ -151,6 +160,20 @@ export function GameEdit() {
             style={{ width: 50 }}
           />
           <span>$</span>
+        </div>
+        <div>
+          <label htmlFor=''>In Stock</label>
+          <input onChange={handleChange} type='checkbox' name={'inStock'} />
+        </div>
+        <div>
+          <label htmlFor=''>Preview:</label>
+          <textarea
+            onChange={handleChange}
+            name='preview'
+            type='text'
+            value={editGame.preview}
+            style={{ width: 350, height: 200 }}
+          />
         </div>
         <label htmlFor=''>Companies:</label>
         <div>

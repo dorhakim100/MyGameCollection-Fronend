@@ -38,8 +38,13 @@ export function GameIndex() {
 
   return (
     <section className='section-container'>
-      <GameFilter filterBy={filterBy} onSetFilter={onSetFilter} />
-      <h2>My Games</h2>
+      <div className='game-index-user-interface'>
+        <GameFilter filterBy={filterBy} onSetFilter={onSetFilter} />
+        <h2>My Games</h2>
+        <Link to={`/game/edit`}>
+          <button>Add Game</button>
+        </Link>
+      </div>
       {!isLoading && <GamesList games={games} />}
       {/* <div className='games-container'>
         {games.map((game) => {
