@@ -13,7 +13,7 @@ import '../css/GameDetails.css'
 export function GameDetails() {
   const params = useParams()
 
-  const [game, setGame] = useState({ labels: [], company: [] })
+  const [game, setGame] = useState({ labels: [], companies: [] })
 
   useEffect(() => {
     console.log(game)
@@ -52,6 +52,7 @@ export function GameDetails() {
           return <span>{label}</span>
         })}
       </div>
+      <Link to={`/game/edit/${game._id}`}>Edit</Link>
     </section>
   )
 }
