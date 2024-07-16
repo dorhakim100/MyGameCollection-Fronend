@@ -58,6 +58,38 @@ function query(filterBy = {}) {
     } else {
       filterBy.labels = []
     }
+    if (filterBy.sortBy) {
+      let sortDirection
+      let type
+      if (filterBy.sortBy === 'NameDescending') {
+        sortDirection = 1
+        type = 'name'
+      } else if (filterBy.sortBy === 'NameAscending') {
+        sortDirection = -1
+        type = 'name'
+      } else if (filterBy.sortBy === 'PriceDescending') {
+        sortDirection = -1
+        type = 'price'
+      } else if (filterBy.sortBy === 'PriceAscending') {
+        sortDirection = 1
+        type = 'price'
+      } else if (filterBy.sortBy === 'TimeDescending') {
+        sortDirection = -1
+        type = 'createdAt'
+      } else if (filterBy.sortBy === 'TimeAscending') {
+        sortDirection = 1
+        type = 'createdAt'
+      }
+      games.sort((game1, game2) => {
+        if (type === 'name') {
+          return game1.name.localeCompare(game2.name) * sortDirection
+        } else if (type === 'price' || type === 'createdAt') {
+          return (game1[type] - game2[type]) * sortDirection
+        }
+      })
+    } else {
+      filterBy.sortBy = ''
+    }
     if (filterBy.pageIdx === null) {
       return games
     } else {

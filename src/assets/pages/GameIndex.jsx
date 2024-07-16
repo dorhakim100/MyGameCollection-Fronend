@@ -42,6 +42,12 @@ export function GameIndex() {
     setFilterBy({ ...filterBy, pageIdx: newPageIdx })
   }
 
+  function onSort({ target }) {
+    const newSortBy = target.value.replace(' ', '')
+
+    setFilterBy({ ...filterBy, sortBy: newSortBy, pageIdx: 0 })
+  }
+
   return (
     <section className='section-container'>
       <div className='game-index-user-interface'>
@@ -53,35 +59,22 @@ export function GameIndex() {
         </Link>
       </div>
       <label htmlFor='sortBy'>Sort By</label>
-      <input list='sortOptions' name='sortOption' id='sortOption' />
+      <input
+        onChange={onSort}
+        list='sortOptions'
+        name='sortOption'
+        id='sortOption'
+      />
       <datalist id='sortOptions'>
         <option>Name Descending</option>
         <option>Name Ascending</option>
+        <option>Price Descending</option>
+        <option>Price Ascending</option>
         <option>Time Descending</option>
         <option>Time Ascending</option>
       </datalist>
       {!isLoading && <GamesList games={games} />}
-      {/* <div className='games-container'>
-        {games.map((game) => {
-          return (
-            <div key={game._id} className='game-container'>
-              <Link to={`/game/${game._id}`}>
-                <div className='game-name-container'>
-                  <h3 className='game-name'>{game.name}</h3>
-                </div>
-                {!game.inStock && (
-                  <span className='unavailable'>UNAVAILABLE</span>
-                )}
-                <div className='hover-shadow'>
-                  <img className='game-cover' src={game.cover} alt='' />
-                </div>
 
-                <img className='game-cover' src={game.cover} alt='' />
-              </Link>
-            </div>
-          )
-        })}
-      </div> */}
       <div className='page-container'>
         <button onClick={() => onChangePageIdx(-1)}>Previous</button>
         <span>{filterBy.pageIdx + 1}</span>

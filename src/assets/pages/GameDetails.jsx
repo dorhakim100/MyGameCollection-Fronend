@@ -49,7 +49,7 @@ export function GameDetails() {
       <h3>Categories:</h3>
       <div className='labels-container'>
         {game.labels.map((label) => {
-          return <span>{label}</span>
+          return <span key={label}>{label}</span>
         })}
       </div>
       <Link to={`/game/edit/${game._id}`}>Edit</Link>
