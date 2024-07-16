@@ -1,8 +1,10 @@
 import { useEffect, useState, useRef } from 'react'
 
+import { setFilterBy } from '../../store/actions/game.actions.js'
+
 import '../css/GameFilter.css'
 
-export function GameFilter(filterBy) {
+export function GameFilter({ filterBy }) {
   const labels = [
     'Adventure',
     'RPG',
@@ -24,20 +26,29 @@ export function GameFilter(filterBy) {
   const [isFiltering, setIsFiltering] = useState(false)
   const [isStock, setIsStock] = useState(false)
 
+  const [onFilterBy, setOnFilterBy] = useState(filterBy)
+
   //   const isCheckRef = useRef()
 
   useEffect(() => {
-    // console.log(isCheckRef.current.checked)
-    // setIsFiltering(isCheckRef.current.checked)
-    // console.log(isCheckRef.current.checked)
-  }, [])
+    console.log(onFilterBy)
+    setFilterBy(onFilterBy)
+  }, [onFilterBy])
 
   function onSetIsFiltering() {
     setIsFiltering((prevIsFiltering) => (prevIsFiltering = !prevIsFiltering))
   }
 
   function onIsSetStock() {
-    setIsStock((prevIsStock) => (prevIsStock = !prevIsStock))
+    console.log(isStock)
+    const currentOnlyIsStock = !isStock
+    if (currentOnlyIsStock) {
+      console.log('works')
+      setOnFilterBy({ ...onFilterBy, inStock: 'onlyInStock' })
+    } else {
+      setOnFilterBy({ ...onFilterBy, inStock: 'all' })
+    }
+    setIsStock(currentOnlyIsStock)
   }
 
   return (

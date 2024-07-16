@@ -20,7 +20,7 @@ const initialState = {
   games: [],
   isCartShown: false,
   shoppingCart: [],
-  isLoading: false,
+  isLoading: true,
   filterBy: gameService.getDefaultFilter(),
   lastGames: [],
 }

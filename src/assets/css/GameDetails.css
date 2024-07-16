@@ -13,6 +13,12 @@ padding: 5px;
     rotate: 10deg;
 }
 
+.back-button{
+    /* position: absolute; */
+    /* top: 250px; */
+    /* inset-inline-start: 250px; */
+}
+
 .game-details-cover{
     width: 250px;
 }

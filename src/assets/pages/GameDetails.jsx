@@ -13,9 +13,10 @@ import '../css/GameDetails.css'
 export function GameDetails() {
   const params = useParams()
 
-  const [game, setGame] = useState({ labels: [] })
+  const [game, setGame] = useState({ labels: [], company: [] })
 
   useEffect(() => {
+    console.log(game)
     loadGame()
   }, [params.gameId])
 
@@ -23,6 +24,7 @@ export function GameDetails() {
     gameService
       .getById(params.gameId)
       .then((game) => {
+        console.log(game)
         setGame({ ...game })
       })
       .catch((err) => {
@@ -33,10 +35,17 @@ export function GameDetails() {
   }
   return (
     <section className='section-container'>
-      {!game.inStock && <span className='unavailable'>UNAVAILABLE</span>}
+      <Link to={`/game`} className='back-button'>
+        Back
+      </Link>
+      {!game.inStock && <span className='unavailable'>OUT OF STOCK</span>}
       <img className='game-details-cover' src={game.cover} alt='' />
       <h2>{game.name}</h2>
       <h3>{game.price}$</h3>
+      <p>{game.preview}</p>
+      {/* {game.company.map((company) => {
+        return <h4>{company}</h4>
+      })} */}
       <h3>Categories:</h3>
       <div className='labels-container'>
         {game.labels.map((label) => {

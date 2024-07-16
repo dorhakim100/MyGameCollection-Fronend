@@ -50,14 +50,15 @@
 
 .game-name-container{
 
-    background-color: var(--links);
+    background-color: var(--text);
+    border: 1px solid var(--border);
 
 
-    width: 140px;
+    width: 120px;
     position: absolute;
 
 
-
+    margin: 5px;
     padding: 5px;
 
     border-radius: 25px;
