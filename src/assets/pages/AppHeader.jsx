@@ -1,7 +1,8 @@
-import { LoginSignup } from './LoginSignup.jsx'
-
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+
+import { UserMsg } from './UserMsg.jsx'
+import { LoginSignup } from './LoginSignup.jsx'
 
 import '../css/AppHeader.css'
 
@@ -27,7 +28,7 @@ export function AppHeader() {
         </nav>
       </section>
 
-      {/* <UserMsg /> */}
+      <UserMsg />
     </header>
   )
 }

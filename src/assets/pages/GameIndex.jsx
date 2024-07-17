@@ -13,9 +13,14 @@ import { setFilterBy } from '../../store/actions/game.actions.js'
 import { setIsLoadingFalse } from '../../store/actions/game.actions.js'
 import { utilService } from '../../services/util.service.js'
 
+import { showUserMsg } from '../../services/event-bus.service.js'
+import { showSuccessMsg } from '../../services/event-bus.service.js'
+import { showErrorMsg } from '../../services/event-bus.service.js'
+
 import gameCover from '/game-cover.jpg'
 
 import '../css/GameIndex.css'
+import { gameService } from '../../services/game.service.js'
 
 export function GameIndex() {
   const games = useSelector((storeState) => storeState.gameModule.games)
@@ -37,6 +42,14 @@ export function GameIndex() {
   }
 
   function onChangePageIdx(diff) {
+    const maxPage = gameService.getMaxPage()
+    console.log(maxPage)
+    console.log(filterBy.pageIdx)
+    if (filterBy.pageIdx + 1 === maxPage && diff === 1) {
+      const newPageIdx = 0
+      setFilterBy({ ...filterBy, pageIdx: newPageIdx })
+      return
+    }
     if (filterBy.pageIdx === 0 && diff === -1) return
     const newPageIdx = filterBy.pageIdx + diff
     setFilterBy({ ...filterBy, pageIdx: newPageIdx })

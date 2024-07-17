@@ -21,6 +21,7 @@ export const gameService = {
   getEmptygame,
   getRandomgame,
   getDefaultFilter,
+  getMaxPage,
 }
 
 function query(filterBy = {}) {
@@ -147,6 +148,13 @@ function getDefaultFilter() {
     sortBy: '',
     pageIdx: 0,
   }
+}
+
+function getMaxPage() {
+  const gamesLength = JSON.parse(localStorage.getItem(STORAGE_KEY)).length
+  console.log(gamesLength)
+  const maxPage = Math.ceil(gamesLength / PAGE_SIZE)
+  return maxPage
 }
 
 // TEST DATA

@@ -2,11 +2,14 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { Link, useParams, useNavigate } from 'react-router-dom'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 import { gameService } from '../../services/game.service.js'
 import { saveGame } from '../../store/actions/game.actions.js'
 import { loadGames } from '../../store/actions/game.actions.js'
+
+import { showSuccessMsg } from '../../services/event-bus.service.js'
+import { showErrorMsg } from '../../services/event-bus.service.js'
 
 import '../css/GameEdit.css'
 
@@ -35,6 +38,8 @@ export function GameEdit() {
 
   const [game, setGame] = useState({ labels: [], companies: [] })
   const [editGame, setEditGame] = useState(game)
+  const [cover, setCover] = useState(null)
+  // const coverRef = useRef(cover)
 
   const filterBy = useSelector(
     (selectorState) => selectorState.gameModule.filterBy
@@ -43,6 +48,7 @@ export function GameEdit() {
   useEffect(() => {
     console.log(game)
     loadGame()
+    console.log(cover)
   }, [params.gameId])
 
   function loadGame() {
@@ -51,6 +57,7 @@ export function GameEdit() {
       .then((game) => {
         setEditGame({ ...game })
         setGame({ ...game })
+        setCover(game.cover)
       })
       .catch((err) => {
         console.error('err:', err)
@@ -116,14 +123,17 @@ export function GameEdit() {
   function onSaveGame(ev) {
     ev.preventDefault()
     const { name, price, labels, companies } = editGame
-    if (!editGame.cover) {
+    if (!cover) {
       editGame.cover =
         'https://vglist.co/packs/media/images/no-cover-369ad8f0ea82dde5923c942ba1a26482.png'
+    } else {
+      editGame.cover = cover
     }
     // todoService.save(todoToEdit)
     saveGame(editGame)
       .then((savedTodo) => {
         console.log(savedTodo)
+        showSuccessMsg('Game saved')
         loadGames(filterBy).then(() => {
           navigate(`/game`)
         })
@@ -134,10 +144,15 @@ export function GameEdit() {
       })
   }
 
+  function renderCover({ target }) {
+    const coverSrc = target.value
+    setCover(coverSrc)
+  }
+
   return (
     <section className='section-container'>
       {/* {game && <h2>Edit{` - ${game.name}`}</h2>} */}
-      {game && <img src={game.cover} alt='' className='game-cover-edit' />}
+      {cover && <img src={cover} alt='' className='game-cover-edit' />}
 
       <form action='' className='game-edit-form' onSubmit={onSaveGame}>
         <div>
@@ -212,6 +227,10 @@ export function GameEdit() {
               )
             })}
           </div>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <label htmlFor=''>Cover link:</label>
+          <input onChange={renderCover} type='text' style={{ width: 350 }} />
         </div>
         <input type='submit' value='Submit'></input>
       </form>
