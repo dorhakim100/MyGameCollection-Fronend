@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 // import { NavLink } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { loadGames } from '../../store/actions/game.actions.js'
 
@@ -21,18 +21,21 @@ import gameCover from '/game-cover.jpg'
 
 import '../css/GameIndex.css'
 import { gameService } from '../../services/game.service.js'
+import { userService } from '../../services/user.service.js'
 
 export function GameIndex() {
   const games = useSelector((storeState) => storeState.gameModule.games)
   const isLoading = useSelector((storeState) => storeState.gameModule.isLoading)
   const filterBy = useSelector((storeState) => storeState.gameModule.filterBy)
 
+  const [user, setUser] = useState(userService.getLoggedinUser())
+
   console.log(games)
   console.log(isLoading)
 
   useEffect(() => {
     console.log(filterBy)
-
+    console.log(user)
     loadGames().then(() => {
       // setIsLoadingFalse(!isLoading)
     })
@@ -94,9 +97,11 @@ export function GameIndex() {
             <option>Time Ascending</option>
           </datalist>
         </div>
-        <Link to={`/game/edit`}>
-          <button>Add Game</button>
-        </Link>
+        {user.isAdmin && (
+          <Link to={`/game/edit`}>
+            <button>Add Game</button>
+          </Link>
+        )}
       </div>
 
       {!isLoading && <GamesList games={games} />}

@@ -21,6 +21,7 @@ export function AppHeader() {
   const [user, setUser] = useState(userService.getLoggedinUser())
 
   const [isCart, setIsCart] = useState(false)
+  const [isLoginPage, setIsLoginPage] = useState(false)
 
   function onSetUser(user) {
     setUser(user)
@@ -46,7 +47,15 @@ export function AppHeader() {
   }
 
   function toggleCart() {
+    if (isLoginPage)
+      setIsLoginPage((prevIsLoginPage) => (prevIsLoginPage = !prevIsLoginPage))
+
     setIsCart((prevIsCart) => (prevIsCart = !prevIsCart))
+  }
+  function toggleLoginPage() {
+    if (isCart) setIsCart((prevIsCart) => (prevIsCart = !prevIsCart))
+
+    setIsLoginPage((prevIsLoginPage) => (prevIsLoginPage = !prevIsLoginPage))
   }
   return (
     <header className='app-header'>
@@ -61,17 +70,26 @@ export function AppHeader() {
           <NavLink to='/dashboard'>Dashboard</NavLink>
           <NavLink to='/about'>About</NavLink>
         </nav>
-        {user ? (
+        {user ? null : (
+          <section>
+            {isLoginPage && (
+              <LoginSignup
+                onSetUser={onSetUser}
+                toggleLoginPage={toggleLoginPage}
+              />
+            )}
+          </section>
+        )}
+        {(!user && (
+          <button onClick={toggleLoginPage}>
+            <i className='fa-solid fa-user'></i>
+          </button>
+        )) || (
           <section className='login-container'>
             <Link to={`/user/${user._id}`}>Hello {user.fullname}</Link>
             <button onClick={onLogout}>Logout</button>
           </section>
-        ) : (
-          <section>
-            <LoginSignup onSetUser={onSetUser} />
-          </section>
         )}
-
         <button onClick={toggleCart}>
           <i className='fa-solid fa-cart-shopping'></i>
         </button>

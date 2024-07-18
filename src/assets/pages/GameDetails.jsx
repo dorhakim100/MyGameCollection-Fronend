@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react'
 import { gameService } from '../../services/game.service.js'
 import { removeGame } from '../../store/actions/game.actions.js'
 
+import { addGameToCart } from '../../store/actions/user.actions.js'
+
 import gameCover from '/game-cover.jpg'
 
 import '../css/GameDetails.css'
@@ -52,6 +54,17 @@ export function GameDetails() {
         showErrorMsg('Cannot delete game')
       })
   }
+
+  function onAddGame(game) {
+    addGameToCart(game)
+      .then(() => {
+        // userService.addGameToCart(game)
+        showSuccessMsg('Game added')
+      })
+      .catch((err) => {
+        showErrorMsg(`Couldn't add game`)
+      })
+  }
   return (
     <section className='section-container game-details'>
       <div className='buttons-container'>
@@ -78,7 +91,7 @@ export function GameDetails() {
         )}
         <img className='game-details-cover' src={game.cover} alt='' />
       </div>
-      {user && <button>Add to Cart</button>}
+      {user && <button onClick={() => onAddGame(game)}>Add to Cart</button>}
       <h2>{game.name}</h2>
       <h3>{game.price}$</h3>
       <p>{game.preview}</p>

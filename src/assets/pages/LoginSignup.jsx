@@ -8,7 +8,9 @@ import { userService } from '../../services/user.service.js'
 import { showErrorMsg } from '../../services/event-bus.service.js'
 import { showSuccessMsg } from '../../services/event-bus.service.js'
 
-export function LoginSignup({ onSetUser }) {
+import '../css/LoginSignun.css'
+
+export function LoginSignup({ onSetUser, toggleLoginPage }) {
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
 
   const [isSignup, setIsSignUp] = useState(user)
@@ -56,6 +58,9 @@ export function LoginSignup({ onSetUser }) {
 
   return (
     <div className='login-page'>
+      <button onClick={toggleLoginPage}>
+        <i className='fa-solid fa-x'></i>
+      </button>
       <form className='login-form' onSubmit={handleSubmit}>
         <input
           type='text'

@@ -1,6 +1,10 @@
 import { userService } from '../../services/user.service.js'
 // import { CLEAR_gameT } from '../reducers/game.reducer.js'
-import { SET_USER, SET_USER_SCORE } from '../reducers/user.reducer.js'
+import {
+  ADD_GAME_TO_CART,
+  SET_USER,
+  SET_USER_SCORE,
+} from '../reducers/user.reducer.js'
 import { store } from '../store.js'
 
 export function login(credentials) {
@@ -48,6 +52,19 @@ export function checkout(diff) {
     })
     .catch((err) => {
       console.log('user actions -> Cannot checkout', err)
+      throw err
+    })
+}
+
+export function addGameToCart(game) {
+  return userService
+    .addGameToCart(game)
+    .then((game) => {
+      console.log(game)
+      store.dispatch({ type: ADD_GAME_TO_CART, game })
+    })
+    .catch((err) => {
+      console.log('user actions -> Cannot add game', err)
       throw err
     })
 }
