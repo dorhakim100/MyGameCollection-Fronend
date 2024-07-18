@@ -1,0 +1,19 @@
+.cart-container{
+
+    position: absolute;
+    inset-inline-end: 1em;
+    background-color: var(--border);
+    border: 2px solid var(--text);
+
+    height: 500px;
+    width: 300px;
+    z-index: 3;
+}
+
+.cart-container>.x-button{
+    position: absolute;
+    inset-inline-end: 1em;
+    top: 1em;
+    padding: 5px;
+    border-radius: 5px;
+}

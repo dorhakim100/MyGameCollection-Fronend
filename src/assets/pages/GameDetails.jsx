@@ -12,12 +12,14 @@ import gameCover from '/game-cover.jpg'
 import '../css/GameDetails.css'
 import { showSuccessMsg } from '../../services/event-bus.service.js'
 import { showErrorMsg } from '../../services/event-bus.service.js'
-
+import { userService } from '../../services/user.service.js'
 export function GameDetails() {
   const params = useParams()
   const navigate = useNavigate()
 
   const [game, setGame] = useState({ labels: [], companies: [] })
+
+  const [user, setUser] = useState(userService.getLoggedinUser())
 
   useEffect(() => {
     console.log(game)
@@ -58,20 +60,25 @@ export function GameDetails() {
             <i className='fa-solid fa-rotate-left'></i>
           </Link>
         </button>
-        <button>
-          <Link to={`/game/edit/${game._id}`}>
-            <i className='fa-solid fa-pen-to-square'></i>
-          </Link>
-        </button>
       </div>
       {!game.inStock && <span className='unavailable'>OUT OF STOCK</span>}
       <div className='cover-container'>
-        <button
-          onClick={() => onRemoveGame(game._id)}
-          className='fa-solid fa-trash'
-        ></button>
+        {user.isAdmin && (
+          <section className='buttons-container'>
+            <button
+              onClick={() => onRemoveGame(game._id)}
+              className='fa-solid fa-trash'
+            ></button>
+            <button>
+              <Link to={`/game/edit/${game._id}`}>
+                <i className='fa-solid fa-pen-to-square'></i>
+              </Link>
+            </button>
+          </section>
+        )}
         <img className='game-details-cover' src={game.cover} alt='' />
       </div>
+      {user && <button>Add to Cart</button>}
       <h2>{game.name}</h2>
       <h3>{game.price}$</h3>
       <p>{game.preview}</p>
@@ -84,10 +91,7 @@ export function GameDetails() {
           return <span key={label}>{label}</span>
         })}
       </div>
-      <div className='nav-buttons-container'>
-        <button>Previous</button>
-        <button>Next</button>
-      </div>
+      <div className='nav-buttons-container'></div>
     </section>
   )
 }

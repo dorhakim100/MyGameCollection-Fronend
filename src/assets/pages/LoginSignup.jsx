@@ -2,10 +2,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
-import { userService } from '../../services/user.service.js'
 import { login, signup, logout } from '../../store/actions/user.actions.js'
+import { userService } from '../../services/user.service.js'
 
 import { showErrorMsg } from '../../services/event-bus.service.js'
+import { showSuccessMsg } from '../../services/event-bus.service.js'
 
 export function LoginSignup({ onSetUser }) {
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
@@ -45,10 +46,7 @@ export function LoginSignup({ onSetUser }) {
           })
       : login(credentials)
           .then((data) => {
-            console.log(data)
             onSetUser(data)
-          })
-          .then(() => {
             showSuccessMsg('Logged in successfully')
           })
           .catch((err) => {

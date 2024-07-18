@@ -12,8 +12,7 @@ padding: 5px;
 }
 
 .cover-container{
-max-width: 411px;
-height:inherit;
+display: flex;
 }
 .shadow{
     width: 250px;
@@ -25,17 +24,17 @@ height:inherit;
 
 }
 
-.cover-container:hover >button{
+.cover-container:hover >.buttons-container{
  opacity: 1;
 
 }
 
-.cover-container>button{
+.cover-container>.buttons-container{
 position: absolute;
 top: 50%;
 right: 50%;
 transform: translate(50%, -50%);
-font-size: 5em;
+font-size: 2.5em;
 
 background-color: rgba(0, 0, 0, 0.771);
 border: 1px solid var(--text);
@@ -46,6 +45,12 @@ border-radius: 25px;
 cursor: pointer;
 opacity: 0;
 transition: 0.2s;
+}
+
+.cover-container>img{
+    opacity: 1;
+
+
 }
 
 .unavailable{

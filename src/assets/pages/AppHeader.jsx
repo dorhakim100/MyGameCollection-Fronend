@@ -1,19 +1,26 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink, Link } from 'react-router-dom'
-import { useState } from 'react'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
+import { useState, useRef } from 'react'
 
 import { UserMsg } from './UserMsg.jsx'
 import { LoginSignup } from './LoginSignup.jsx'
+import { Cart } from './Cart.jsx'
 
 import { userService } from '../../services/user.service.js'
 import { login, signup, logout } from '../../store/actions/user.actions.js'
+
+import { showErrorMsg } from '../../services/event-bus.service.js'
 
 import icon from '/game-controller.svg'
 
 import '../css/AppHeader.css'
 
 export function AppHeader() {
+  const navigate = useNavigate()
+
   const [user, setUser] = useState(userService.getLoggedinUser())
+
+  const [isCart, setIsCart] = useState(false)
 
   function onSetUser(user) {
     setUser(user)
@@ -36,6 +43,10 @@ export function AppHeader() {
       .catch((err) => {
         showErrorMsg('OOPs try again')
       })
+  }
+
+  function toggleCart() {
+    setIsCart((prevIsCart) => (prevIsCart = !prevIsCart))
   }
   return (
     <header className='app-header'>
@@ -61,11 +72,11 @@ export function AppHeader() {
           </section>
         )}
 
-        <button>
+        <button onClick={toggleCart}>
           <i className='fa-solid fa-cart-shopping'></i>
         </button>
       </section>
-
+      {isCart && <Cart toggleCart={toggleCart} />}
       <UserMsg />
     </header>
   )

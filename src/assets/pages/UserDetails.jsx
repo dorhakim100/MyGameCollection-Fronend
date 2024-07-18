@@ -5,8 +5,8 @@ import { Link, useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 import { gameService } from '../../services/game.service.js'
-import { userService } from '../../services/user.service.js'
 import { removeGame } from '../../store/actions/game.actions.js'
+import { userService } from '../../services/user.service.js'
 
 export function UserDetails() {
   const [user, setUser] = useState(userService.getLoggedinUser())
