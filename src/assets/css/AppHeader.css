@@ -31,3 +31,10 @@
     height: 5em;
 
 }
+
+.login-container{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    gap: 1em;
+}

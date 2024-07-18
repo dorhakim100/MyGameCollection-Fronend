@@ -1,4 +1,27 @@
+import { useDispatch, useSelector } from 'react-redux'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+
+import { userService } from '../../services/user.service.js'
+import { login, signup, logout } from '../../store/actions/user.actions.js'
+
+import { showErrorMsg } from '../../services/event-bus.service.js'
+
 export function LoginSignup({ onSetUser }) {
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
+
+  const [isSignup, setIsSignUp] = useState(user)
+  const [credentials, setCredentials] = useState(
+    userService.getEmptyCredentials()
+  )
+
+  const navigate = useNavigate()
+
+  function handleChange({ target }) {
+    const { name: field, value } = target
+    setCredentials((prevCreds) => ({ ...prevCreds, [field]: value }))
+  }
+
   function handleChange({ target }) {
     const { name: field, value } = target
     setCredentials((prevCreds) => ({ ...prevCreds, [field]: value }))
@@ -8,31 +31,30 @@ export function LoginSignup({ onSetUser }) {
     ev.preventDefault()
     onLogin(credentials)
   }
-
-  // function onLogin(credentials) {
-  //   isSignup
-  //     ? signup(credentials)
-  //         .then((data) => {
-  //           onSetUser(data.loggedinUser)
-  //         })
-  //         .then(() => {
-  //           showSuccessMsg('Signed in successfully')
-  //         })
-  //         .catch((err) => {
-  //           showErrorMsg('Oops try again')
-  //         })
-  //     : login(credentials)
-  //         .then((data) => {
-  //           console.log(data)
-  //           onSetUser(data)
-  //         })
-  //         .then(() => {
-  //           showSuccessMsg('Logged in successfully')
-  //         })
-  //         .catch((err) => {
-  //           showErrorMsg('Oops try again')
-  //         })
-  // }
+  function onLogin(credentials) {
+    isSignup
+      ? signup(credentials)
+          .then((data) => {
+            onSetUser(data.loggedinUser)
+          })
+          .then(() => {
+            showSuccessMsg('Signed in successfully')
+          })
+          .catch((err) => {
+            showErrorMsg('Oops try again')
+          })
+      : login(credentials)
+          .then((data) => {
+            console.log(data)
+            onSetUser(data)
+          })
+          .then(() => {
+            showSuccessMsg('Logged in successfully')
+          })
+          .catch((err) => {
+            showErrorMsg('Oops try again')
+          })
+  }
 
   return (
     <div className='login-page'>
@@ -65,7 +87,7 @@ export function LoginSignup({ onSetUser }) {
             required
           />
         )}
-        <button onClick={onSignupLogin}>{isSignup ? 'Signup' : 'Login'}</button>
+        <button>{isSignup ? 'Signup' : 'Login'}</button>
       </form>
 
       <div className='btns'>
