@@ -4,13 +4,18 @@ import { NavLink } from 'react-router-dom'
 import { UserMsg } from './UserMsg.jsx'
 import { LoginSignup } from './LoginSignup.jsx'
 
+import icon from '/game-controller.svg'
+
 import '../css/AppHeader.css'
 
 export function AppHeader() {
   return (
     <header className='app-header'>
       <section className='header-container'>
-        <h1>My Game Collection</h1>
+        <div className='logo-container'>
+          <h1>Game Store</h1>
+          <img className='icon' src={icon} alt='' />
+        </div>
         {/* {user ? (
           <section>
             <Link to={`/user/${user._id}`}>Hello {user.fullname}</Link>

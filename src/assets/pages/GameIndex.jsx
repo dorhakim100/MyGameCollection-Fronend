@@ -32,6 +32,7 @@ export function GameIndex() {
 
   useEffect(() => {
     console.log(filterBy)
+
     loadGames().then(() => {
       // setIsLoadingFalse(!isLoading)
     })
@@ -42,17 +43,19 @@ export function GameIndex() {
   }
 
   function onChangePageIdx(diff) {
-    const maxPage = gameService.getMaxPage()
-    console.log(maxPage)
-    console.log(filterBy.pageIdx)
-    if (filterBy.pageIdx + 1 === maxPage && diff === 1) {
-      const newPageIdx = 0
+    // const maxPage = gameService.getMaxPage()
+    gameService.getMaxPage().then((maxPage) => {
+      console.log(maxPage)
+      console.log(filterBy.pageIdx)
+      if (filterBy.pageIdx + 1 === maxPage && diff === 1) {
+        const newPageIdx = 0
+        setFilterBy({ ...filterBy, pageIdx: newPageIdx })
+        return
+      }
+      if (filterBy.pageIdx === 0 && diff === -1) return
+      const newPageIdx = filterBy.pageIdx + diff
       setFilterBy({ ...filterBy, pageIdx: newPageIdx })
-      return
-    }
-    if (filterBy.pageIdx === 0 && diff === -1) return
-    const newPageIdx = filterBy.pageIdx + diff
-    setFilterBy({ ...filterBy, pageIdx: newPageIdx })
+    })
   }
 
   function onSort({ target }) {

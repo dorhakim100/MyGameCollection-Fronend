@@ -52,9 +52,11 @@ export function GameEdit() {
   }, [params.gameId])
 
   function loadGame() {
+    if (params.gameId === undefined) return
     gameService
       .getById(params.gameId)
       .then((game) => {
+        console.log(game)
         setEditGame({ ...game })
         setGame({ ...game })
         setCover(game.cover)
