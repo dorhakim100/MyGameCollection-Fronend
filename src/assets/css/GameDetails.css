@@ -11,6 +11,43 @@
 padding: 5px;
 }
 
+.cover-container{
+max-width: 411px;
+height:inherit;
+}
+.shadow{
+    width: 250px;
+    height: 100%;
+    
+    
+    background-color: rgb(255, 0, 0);
+    z-index: 2;
+
+}
+
+.cover-container:hover >button{
+ opacity: 1;
+
+}
+
+.cover-container>button{
+position: absolute;
+top: 50%;
+right: 50%;
+transform: translate(50%, -50%);
+font-size: 5em;
+
+background-color: rgba(0, 0, 0, 0.771);
+border: 1px solid var(--text);
+
+padding: 50px;
+border-radius: 25px;
+
+cursor: pointer;
+opacity: 0;
+transition: 0.2s;
+}
+
 .unavailable{
     background-color: var(--high-importance);
     color: var(--text);
