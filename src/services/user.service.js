@@ -12,6 +12,9 @@ export const userService = {
   updateScore,
   getEmptyCredentials,
   addGameToCart,
+  removeGameFromCart,
+  clearCart,
+  checkout,
 }
 
 function getById(userId) {
@@ -37,7 +40,11 @@ function signup({ username, password, fullname }) {
     isAdmin: false,
   }
   if (user.fullname === 'Dor Hakim') user.isAdmin = true
-  return storageService.post(STORAGE_KEY, user).then(_setLoggedinUser)
+  return storageService.post(STORAGE_KEY, user).then(() => {
+    _setLoggedinUser(user)
+    console.log(user)
+    return user
+  })
 }
 
 function updateScore(diff) {
@@ -86,15 +93,55 @@ function getEmptyCredentials() {
   }
 }
 
-function addGameToCart(game) {
+function addGameToCart(gameToAdd) {
   const user = getLoggedinUser()
-  user.gamesInCart.push(game)
   console.log(user)
-  _setLoggedinUser(user)
+
+  user.gamesInCart.push(gameToAdd)
+
+  _setLoggedinUser({ ...user })
   return storageService
-    .put(STORAGE_KEY, { ...user, gamesInCart: user.gamesInCart })
+    .put(STORAGE_KEY, { ...user, gamesInCart: [...user.gamesInCart] })
     .then(() => {
-      return Promise.resolve(game)
+      return Promise.resolve(gameToAdd)
+    })
+}
+
+function removeGameFromCart(gameId) {
+  let user = getLoggedinUser()
+  console.log(user)
+  user.gamesInCart = user.gamesInCart.filter((game) => game._id !== gameId)
+  console.log(user)
+  _setLoggedinUser({ ...user })
+  return storageService
+    .put(STORAGE_KEY, { ...user, gamesInCart: [...user.gamesInCart] })
+    .then((updatedUser) => {
+      return Promise.resolve(updatedUser)
+    })
+}
+
+function clearCart() {
+  let user = getLoggedinUser()
+  _setLoggedinUser({ ...user, gamesInCart: [] })
+  return storageService
+    .put(STORAGE_KEY, { ...user, gamesInCart: [] })
+    .then((updatedUser) => {
+      return Promise.resolve(updatedUser)
+    })
+}
+
+function checkout(newScore) {
+  let user = getLoggedinUser()
+  const newUser = _setLoggedinUser({
+    ...user,
+    gamesInCart: [],
+    score: newScore,
+  })
+
+  return storageService
+    .put(STORAGE_KEY, { ...user, gamesInCart: [], score: newScore })
+    .then((updatedUser) => {
+      return Promise.resolve(updatedUser)
     })
 }
 

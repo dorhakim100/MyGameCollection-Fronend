@@ -15,11 +15,15 @@ export const ADD_GAME_TO_CART = 'ADD_GAME_TO_CART'
 export const REMOVE_GAME_FROM_CART = 'REMOVE_GAME_FROM_CART'
 export const CLEAR_CART = 'CLEAR_CART'
 
+const user = userService.getLoggedinUser()
+
 const initialState = {
   count: 105,
   loggedInUser: userService.getLoggedinUser(),
-  shoppingCart: [],
+  shoppingCart: (user && userService.getLoggedinUser().gamesInCart) || [],
 }
+
+console.log(initialState.shoppingCart)
 
 export function userReducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -45,16 +49,27 @@ export function userReducer(state = initialState, action = {}) {
       return { ...state, isCartShown: !state.isCartShown }
 
     case ADD_GAME_TO_CART:
+      state.shoppingCart.map((game) => {
+        if (game._id === action.game) {
+          if (game.quantity === 0) {
+            game.quantity = 1
+          } else {
+            game.quantity++
+          }
+          return {
+            ...state,
+            shoppingCart: [...state.shoppingCart],
+          }
+        }
+      })
       return {
         ...state,
         shoppingCart: [...state.shoppingCart, action.game],
       }
 
     case REMOVE_GAME_FROM_CART:
-      const shoppingCart = state.shoppingCart.filter(
-        (game) => game._id !== action.gameId
-      )
-      return { ...state, shoppingCart }
+      console.log(action.updatedUser)
+      return { ...state, shoppingCart: action.updatedUser.gamesInCart }
 
     case CLEAR_CART:
       return { ...state, shoppingCart: [] }

@@ -21,7 +21,7 @@ export function GameDetails() {
 
   const [game, setGame] = useState({ labels: [], companies: [] })
 
-  const [user, setUser] = useState(userService.getLoggedinUser())
+  const [user, setUser] = useState(userService.getLoggedinUser() || {})
 
   useEffect(() => {
     console.log(game)
@@ -55,11 +55,23 @@ export function GameDetails() {
       })
   }
 
-  function onAddGame(game) {
+  function onAddGameToCart(game) {
+    if (!game.inStock) {
+      showErrorMsg('Game is not in stock')
+      return
+    }
+
+    if (!user.gamesInCart) {
+      showErrorMsg('Please login or create account')
+
+      return
+    }
     addGameToCart(game)
       .then(() => {
         // userService.addGameToCart(game)
         showSuccessMsg('Game added')
+        console.log('bla')
+        navigate(`/game`)
       })
       .catch((err) => {
         showErrorMsg(`Couldn't add game`)
@@ -91,7 +103,9 @@ export function GameDetails() {
         )}
         <img className='game-details-cover' src={game.cover} alt='' />
       </div>
-      {user && <button onClick={() => onAddGame(game)}>Add to Cart</button>}
+      {user && (
+        <button onClick={() => onAddGameToCart(game)}>Add to Cart</button>
+      )}
       <h2>{game.name}</h2>
       <h3>{game.price}$</h3>
       <p>{game.preview}</p>

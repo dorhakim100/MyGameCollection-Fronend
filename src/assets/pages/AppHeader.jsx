@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, Link, useNavigate } from 'react-router-dom'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 import { UserMsg } from './UserMsg.jsx'
 import { LoginSignup } from './LoginSignup.jsx'
@@ -22,9 +22,21 @@ export function AppHeader() {
 
   const [isCart, setIsCart] = useState(false)
   const [isLoginPage, setIsLoginPage] = useState(false)
+  const [score, setScore] = useState(0)
+
+  const storeCart = useSelector(
+    (stateSelector) => stateSelector.userModule.shoppingCart
+  )
+  console.log(storeCart)
+
+  const [cartLength, setCartLength] = useState(0)
+
+  // useEffect(() => {
+  // }, [user])
 
   function onSetUser(user) {
     setUser(user)
+    setScore(user.score)
     navigate(`/`)
   }
 
@@ -87,14 +99,20 @@ export function AppHeader() {
         )) || (
           <section className='login-container'>
             <Link to={`/user/${user._id}`}>Hello {user.fullname}</Link>
+            {user && <span>{score}$</span>}
             <button onClick={onLogout}>Logout</button>
           </section>
         )}
-        <button onClick={toggleCart}>
-          <i className='fa-solid fa-cart-shopping'></i>
-        </button>
+        <div className='cart-button-container'>
+          <button onClick={toggleCart} className='cart-button'>
+            <i className='fa-solid fa-cart-shopping'></i>
+          </button>
+          {storeCart.length > 0 && (
+            <div className='cart-quantity'>{storeCart.length}</div>
+          )}
+        </div>
       </section>
-      {isCart && <Cart toggleCart={toggleCart} />}
+      {isCart && <Cart toggleCart={toggleCart} setScore={setScore} />}
       <UserMsg />
     </header>
   )

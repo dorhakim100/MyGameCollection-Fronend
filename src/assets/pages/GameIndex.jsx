@@ -28,7 +28,7 @@ export function GameIndex() {
   const isLoading = useSelector((storeState) => storeState.gameModule.isLoading)
   const filterBy = useSelector((storeState) => storeState.gameModule.filterBy)
 
-  const [user, setUser] = useState(userService.getLoggedinUser())
+  const [user, setUser] = useState(userService.getLoggedinUser() || {})
 
   console.log(games)
   console.log(isLoading)

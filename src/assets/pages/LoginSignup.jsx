@@ -37,8 +37,11 @@ export function LoginSignup({ onSetUser, toggleLoginPage }) {
   function onLogin(credentials) {
     isSignup
       ? signup(credentials)
-          .then((data) => {
-            onSetUser(data.loggedinUser)
+          .then((loggedinUser) => {
+            console.log(loggedinUser)
+
+            onSetUser(loggedinUser)
+            // navigate('/game')
           })
           .then(() => {
             showSuccessMsg('Signed in successfully')
