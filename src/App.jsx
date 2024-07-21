@@ -13,6 +13,9 @@ import { GameIndex } from './assets/pages/GameIndex.jsx'
 import { GameDetails } from './assets/pages/GameDetails.jsx'
 import { GameEdit } from './assets/pages/GameEdit.jsx'
 import { UserDetails } from './assets/pages/UserDetails.jsx'
+import { About } from './assets/pages/About.jsx'
+import { AboutTeam } from './assets/pages/AboutTeam.jsx'
+import { AboutVision } from './assets/pages/AboutVision.jsx'
 
 import { store } from '../src/store/store.js'
 
@@ -28,10 +31,10 @@ export function App() {
             <main>
               <Routes>
                 <Route path='/' element={<Home />} />
-                {/* <Route path='/about' element={<About />}> */}
-                {/* <Route path='team' element={<AboutTeam />} />
-                  <Route path='vision' element={<AboutVision />} /> */}
-                {/* </Route> */}
+                <Route path='/about' element={<About />}>
+                  <Route path='team' element={<AboutTeam />} />
+                  <Route path='vision' element={<AboutVision />} />
+                </Route>
                 <Route path='/game/:gameId' element={<GameDetails />} />
                 <Route path='/game/edit/:gameId' element={<GameEdit />} />
                 <Route path='/game/edit' element={<GameEdit />} />
