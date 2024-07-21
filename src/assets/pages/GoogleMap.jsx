@@ -1,6 +1,8 @@
 import React from 'react'
 import GoogleMapReact from 'google-map-react'
 
+import { Button } from '@mui/material'
+
 import { useEffect, useState } from 'react'
 
 const AnyReactComponent = ({ text }) => (
@@ -43,9 +45,15 @@ export function GoogleMap() {
     // Important! Always set the container height explicitly
 
     <div style={{ height: '50vh', width: '50vw' }}>
-      <button onClick={() => onSetDestination('telAviv')}>Tel Aviv</button>
-      <button onClick={() => onSetDestination('herzeliya')}>Herzeliya</button>
-      <button onClick={() => onSetDestination('jerusalem')}>Jerusalem</button>
+      <Button variant='contained' onClick={() => onSetDestination('telAviv')}>
+        Tel Aviv
+      </Button>
+      <Button variant='contained' onClick={() => onSetDestination('herzeliya')}>
+        Herzeliya
+      </Button>
+      <Button variant='contained' onClick={() => onSetDestination('jerusalem')}>
+        Jerusalem
+      </Button>
       <GoogleMapReact
         bootstrapURLKeys={{ key: MY_KEY }}
         center={cords}

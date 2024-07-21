@@ -43,7 +43,7 @@ export function MyForm({ handleSubmit, isSignup }) {
             {errors.password && touched.password ? (
               <div>{errors.password}</div>
             ) : null}
-            {isSignup && <Field name='fullname' />}
+            {isSignup && <Field name='fullname' placeholder='Full Name' />}
             {errors.fullname && touched.fullname ? (
               <div>{errors.password}</div>
             ) : null}

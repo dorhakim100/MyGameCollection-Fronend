@@ -4,6 +4,8 @@ import { AboutPreview } from './AboutPreview.jsx'
 import { Link, useNavigate, Outlet } from 'react-router-dom'
 import { useState } from 'react'
 
+import { Button } from '@mui/material'
+
 import '../css/about.css'
 
 export function About() {

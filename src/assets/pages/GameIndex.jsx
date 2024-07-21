@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux'
 // import { NavLink } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
+import { Button, Autocomplete, TextField } from '@mui/material'
+
 import { useEffect, useState } from 'react'
 
 import { loadGames } from '../../store/actions/game.actions.js'
@@ -69,19 +71,42 @@ export function GameIndex() {
     // })
   }
 
-  function onSort({ target }) {
-    const newSortBy = target.value.replace(' ', '')
+  function onSort(ev, value) {
+    console.log(value)
+    const newSortBy = value.replace(' ', '')
 
     setFilterBy({ ...filterBy, sortBy: newSortBy, pageIdx: 0 })
   }
 
+  const options = [
+    'Name Descending',
+    'Name Ascending',
+    'Price Descending',
+    'Price Ascending',
+    'Time Descending',
+    'Time Ascending',
+  ]
+
   return (
     <section className='section-container'>
       <div className='game-index-user-interface'>
-        <GameFilter filterBy={filterBy} onSetFilter={onSetFilter} />
+        <GameFilter
+          filterBy={filterBy}
+          onSetFilter={(event, value) => onSetFilter(ev, value)}
+        />
         {/* <h2>My Games</h2> */}
         <div>
-          <label htmlFor='sortBy'>Sort By:</label>
+          <Autocomplete
+            onChange={onSort}
+            disablePortal
+            id='combo-box-demo'
+            options={options}
+            sx={{
+              width: 250,
+            }}
+            renderInput={(params) => <TextField {...params} label='Sort' />}
+          />
+          {/* <label htmlFor='sortBy'>Sort By:</label>
           <input
             onChange={onSort}
             list='sortOptions'
@@ -95,7 +120,7 @@ export function GameIndex() {
             <option>Price Ascending</option>
             <option>Time Descending</option>
             <option>Time Ascending</option>
-          </datalist>
+          </datalist> */}
         </div>
         {user.isAdmin && (
           <Link to={`/game/edit`}>
@@ -107,9 +132,13 @@ export function GameIndex() {
       {!isLoading && <GamesList games={games} />}
 
       <div className='page-container'>
-        <button onClick={() => onChangePageIdx(-1)}>Previous</button>
+        <Button variant='contained' onClick={() => onChangePageIdx(-1)}>
+          Previous
+        </Button>
         <span>{filterBy.pageIdx + 1}</span>
-        <button onClick={() => onChangePageIdx(1)}>Next</button>
+        <Button variant='contained' onClick={() => onChangePageIdx(1)}>
+          Next
+        </Button>
       </div>
     </section>
   )

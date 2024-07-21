@@ -14,6 +14,7 @@ import { store } from '../store.js'
 
 export function loadGames() {
   const filterBy = store.getState().gameModule.filterBy
+  console.log(filterBy)
   store.dispatch({ type: SET_IS_LOADING, isLoading: true })
   return gameService
     .query(filterBy)
@@ -75,4 +76,22 @@ export function setFilterBy(filterBy) {
 
 export function setIsLoadingFalse(isLoading) {
   store.dispatch({ type: SET_IS_LOADING, isLoading })
+}
+
+export function getAllGames() {
+  const filterBy = store.getState().gameModule.filterBy
+  const allGamesFilter = { ...filterBy, pageIdx: null }
+  store.dispatch({ type: SET_IS_LOADING, isLoading: true })
+  return gameService
+    .query(allGamesFilter)
+    .then((games) => {
+      store.dispatch({ type: SET_GAMES, games })
+    })
+    .catch((err) => {
+      console.log('game action -> Cannot load games', err)
+      throw err
+    })
+    .finally(() => {
+      store.dispatch({ type: SET_IS_LOADING, isLoading: false })
+    })
 }

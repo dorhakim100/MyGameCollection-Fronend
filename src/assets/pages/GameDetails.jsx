@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { Link, useParams, useNavigate } from 'react-router-dom'
 
+import { Button } from '@mui/material'
+
 import { useEffect, useState } from 'react'
 
 import { gameService } from '../../services/game.service.js'
@@ -80,11 +82,11 @@ export function GameDetails() {
   return (
     <section className='section-container game-details'>
       <div className='buttons-container'>
-        <button>
+        <Button variant='outlined'>
           <Link to={`/game`} className='back-button'>
             <i className='fa-solid fa-rotate-left'></i>
           </Link>
-        </button>
+        </Button>
       </div>
       {!game.inStock && <span className='unavailable'>OUT OF STOCK</span>}
       <div className='cover-container'>
@@ -104,7 +106,9 @@ export function GameDetails() {
         <img className='game-details-cover' src={game.cover} alt='' />
       </div>
       {user && (
-        <button onClick={() => onAddGameToCart(game)}>Add to Cart</button>
+        <Button variant='outlined' onClick={() => onAddGameToCart(game)}>
+          Add to Cart
+        </Button>
       )}
       <h2>{game.name}</h2>
       <h3>{game.price}$</h3>
