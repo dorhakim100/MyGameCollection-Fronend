@@ -8,6 +8,8 @@ import { userService } from '../../services/user.service.js'
 import { showErrorMsg } from '../../services/event-bus.service.js'
 import { showSuccessMsg } from '../../services/event-bus.service.js'
 
+import { MyForm } from './MyForm.jsx'
+
 import '../css/LoginSignun.css'
 
 export function LoginSignup({ onSetUser, toggleLoginPage }) {
@@ -64,7 +66,8 @@ export function LoginSignup({ onSetUser, toggleLoginPage }) {
       <button onClick={toggleLoginPage}>
         <i className='fa-solid fa-x'></i>
       </button>
-      <form className='login-form' onSubmit={handleSubmit}>
+      <MyForm handleSubmit={handleSubmit} isSignup={isSignup} />
+      {/* <form className='login-form' onSubmit={handleSubmit}>
         <input
           type='text'
           name='username'
@@ -94,10 +97,14 @@ export function LoginSignup({ onSetUser, toggleLoginPage }) {
           />
         )}
         <button>{isSignup ? 'Signup' : 'Login'}</button>
-      </form>
+      </form> */}
 
       <div className='btns'>
-        <a href='#' onClick={() => setIsSignUp(!isSignup)}>
+        <a
+          href='#'
+          onClick={() => setIsSignUp(!isSignup)}
+          style={{ padding: '15px' }}
+        >
           {isSignup ? 'Already a member? Login' : 'New user? Signup here'}
         </a>
       </div>
