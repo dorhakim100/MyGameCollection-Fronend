@@ -96,21 +96,23 @@ export function GameIndex() {
         />
         {/* <h2>My Games</h2> */}
         <div>
-          <Autocomplete
-            onChange={onSort}
-            disablePortal
-            id='combo-box-demo'
-            options={options}
-            sx={{
-              width: 250,
-            }}
-            renderInput={(params) => <TextField {...params} label='Sort' />}
-          />
+          <div className='sort-container'>
+            <Autocomplete
+              onChange={onSort}
+              disablePortal
+              id='combo-box-demo'
+              options={options}
+              sx={{
+                width: 250,
+              }}
+              renderInput={(params) => <TextField {...params} label='Sort' />}
+            />
+          </div>
           {/* <label htmlFor='sortBy'>Sort By:</label>
           <input
-            onChange={onSort}
-            list='sortOptions'
-            name='sortOption'
+          onChange={onSort}
+          list='sortOptions'
+          name='sortOption'
             id='sortOption'
           />
           <datalist id='sortOptions'>
