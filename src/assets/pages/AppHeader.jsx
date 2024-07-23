@@ -13,7 +13,7 @@ import { showErrorMsg } from '../../services/event-bus.service.js'
 
 import icon from '/game-controller.svg'
 
-import '../css/AppHeader.css'
+// import '../css/AppHeader.css'
 
 export function AppHeader() {
   const navigate = useNavigate()

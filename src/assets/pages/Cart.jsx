@@ -6,7 +6,7 @@ import { removeGameFromCart } from '../../store/actions/user.actions.js'
 import { clearCart } from '../../store/actions/user.actions.js'
 import { checkoutStore } from '../../store/actions/user.actions.js'
 
-import '../css/Cart.css'
+// import '../css/Cart.css'
 import {
   showErrorMsg,
   showSuccessMsg,

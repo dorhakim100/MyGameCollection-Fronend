@@ -16,7 +16,7 @@ const SignupSchema = Yup.object().shape({
   fullname: Yup.string().min(2, 'Too Short!').required('Required'),
 })
 
-export function MyForm({ handleSubmit, isSignup }) {
+export function MyForm({ handleSubmit, isSignup, handleChange }) {
   return (
     <div>
       <Formik

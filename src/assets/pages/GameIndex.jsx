@@ -48,27 +48,28 @@ export function GameIndex() {
   }
 
   function onChangePageIdx(diff) {
-    const maxPage = gameService.getMaxPage()
-    if (filterBy.pageIdx + 1 === maxPage && diff === 1) {
-      const newPageIdx = 0
-      setFilterBy({ ...filterBy, pageIdx: newPageIdx })
-      return
-    }
-    if (filterBy.pageIdx === 0 && diff === -1) return
-    const newPageIdx = filterBy.pageIdx + diff
-    setFilterBy({ ...filterBy, pageIdx: newPageIdx })
-    // gameService.getMaxPage().then((maxPage) => {
-    //   console.log(maxPage)
-    //   console.log(filterBy.pageIdx)
-    //   if (filterBy.pageIdx + 1 === maxPage && diff === 1) {
-    //     const newPageIdx = 0
-    //     setFilterBy({ ...filterBy, pageIdx: newPageIdx })
-    //     return
-    //   }
-    //   if (filterBy.pageIdx === 0 && diff === -1) return
-    //   const newPageIdx = filterBy.pageIdx + diff
+    // const maxPage = gameService.getMaxPage()
+    // console.log(maxPage)
+    // if (filterBy.pageIdx + 1 === maxPage && diff === 1) {
+    //   const newPageIdx = 0
     //   setFilterBy({ ...filterBy, pageIdx: newPageIdx })
-    // })
+    //   return
+    // }
+    // if (filterBy.pageIdx === 0 && diff === -1) return
+    // const newPageIdx = filterBy.pageIdx + diff
+    // setFilterBy({ ...filterBy, pageIdx: newPageIdx })
+    gameService.getMaxPage().then((maxPage) => {
+      console.log(maxPage)
+      console.log(filterBy.pageIdx)
+      if (filterBy.pageIdx + 1 === maxPage - 1 && diff === 1) {
+        const newPageIdx = 0
+        setFilterBy({ ...filterBy, pageIdx: newPageIdx })
+        return
+      }
+      if (filterBy.pageIdx === 0 && diff === -1) return
+      const newPageIdx = filterBy.pageIdx + diff
+      setFilterBy({ ...filterBy, pageIdx: newPageIdx })
+    })
   }
 
   function onSort(ev, value) {

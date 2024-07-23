@@ -33,6 +33,7 @@ export function LoginSignup({ onSetUser, toggleLoginPage }) {
   }
 
   function handleSubmit(ev) {
+    console.log(credentials)
     ev.preventDefault()
     onLogin(credentials)
   }
@@ -66,8 +67,12 @@ export function LoginSignup({ onSetUser, toggleLoginPage }) {
       <button onClick={toggleLoginPage}>
         <i className='fa-solid fa-x'></i>
       </button>
-      <MyForm handleSubmit={handleSubmit} isSignup={isSignup} />
-      {/* <form className='login-form' onSubmit={handleSubmit}>
+      {/* <MyForm
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        isSignup={isSignup}
+      /> */}
+      <form className='login-form' onSubmit={handleSubmit}>
         <input
           type='text'
           name='username'
@@ -97,7 +102,7 @@ export function LoginSignup({ onSetUser, toggleLoginPage }) {
           />
         )}
         <button>{isSignup ? 'Signup' : 'Login'}</button>
-      </form> */}
+      </form>
 
       <div className='btns'>
         <a

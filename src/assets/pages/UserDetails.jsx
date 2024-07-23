@@ -18,6 +18,7 @@ export function UserDetails() {
   return (
     <section>
       <h2>Hello {user && user.fullname}</h2>
+      <h4>Thank you for your order</h4>
     </section>
   )
 }
