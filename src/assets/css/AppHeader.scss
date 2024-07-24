@@ -1,9 +1,13 @@
 .app-header{
     position: absolute;
     top: 0px;
-    left: 25px;
-    right: 25px;
-    margin: auto 0;
+    left: 0px;
+    right: 0px;
+    // margin: auto 0;
+    margin-left: 0px;
+    margin-right: 0px;
+    background-color: #1976d2;
+
 
     max-width: 1280px;
     margin: 0 auto;
@@ -15,38 +19,74 @@
         align-items: center;
         justify-content: space-around;
 
+        .search-container{
 
-        .logo-container{
-            display: flex;
-            align-items: center;
-            gap: 5px;
-
-            .icon{
-                height: 5em;
+            .logo-container{
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                font-size: 0.5vw;
+                @media (max-width: 800px) {
+                    font-size: 1.2vw;
+                    
+                }
+            //    font-size: min(3vw, 36px);
+                
+    
+                .icon{
+                    height: 4.5vw;
+                }
             }
         }
 
 
         .app-nav{
+            
             display: flex;
             justify-content: space-around;
             gap: 2em;
-        }
+            padding: 15px;
 
+            a{
+                color: white;
+            }
+
+            &::after{
+                position: relative;
+                top: 0px;
+                right: 10px;
+                content: '';
+                height: 35px;
+                width: 3px;
+                border-radius: 5px;
+                background-color: rgba(26, 26, 26, 0.376);
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;         
+               }
+        }
+        
         .login-container{
             display: flex;
             align-items: center;
             justify-items: center;
             gap: 1em;
-        }
 
+            a{
+                color: white;
+            }
+        }
+        
+        button{
+            margin: 10px;
+        }
         .cart-button-container{
             display: flex;
 
             .cart-button{
                 z-index: 0;
             }
-        
+            button{
+                margin: 15px;
+            }
         }
         .cart-quantity{
             position: relative;
@@ -76,3 +116,21 @@
     }
 
 }
+
+.logo-container{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.5vw;
+    @media (max-width: 800px) {
+        font-size: 1.2vw;
+        
+    }
+//    font-size: min(3vw, 36px);
+    
+
+    .icon{
+        height: 4.5vw;
+    }
+}
+

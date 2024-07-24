@@ -32,14 +32,10 @@ export function Home() {
   }
 
   return (
-    <section>
+    <section className='section-container home'>
       <h2>"Your Ultimate Destination for Gaming Excellence!"</h2>
       <SlideShow img1={img1} img2={img2} img3={img3} />
-      <div className='imgs-slideshow-container'>
-        {/* <img src={img1} alt='' />
-        <img src={img2} alt='' />
-        <img src={img3} alt='' /> */}
-      </div>
+
       <h4>Choose your console</h4>
       <div className='companies-container'>
         <img

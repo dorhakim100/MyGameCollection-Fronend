@@ -1,4 +1,8 @@
 
+.filtering-container{
+    display: flex;
+}
+
 
 .filtering-container>input[type='checkbox']{
     display: none;

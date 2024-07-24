@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { Button, Autocomplete, TextField } from '@mui/material'
+import { Loader, Placeholder } from 'rsuite'
 
 import { useEffect, useState } from 'react'
 
@@ -20,6 +21,7 @@ import { showSuccessMsg } from '../../services/event-bus.service.js'
 import { showErrorMsg } from '../../services/event-bus.service.js'
 
 import gameCover from '/game-cover.jpg'
+import loader from '/loader.svg'
 
 import '../css/GameIndex.css'
 import { gameService } from '../../services/game.service.js'
@@ -32,12 +34,8 @@ export function GameIndex() {
 
   const [user, setUser] = useState(userService.getLoggedinUser() || {})
 
-  console.log(games)
-  console.log(isLoading)
-
   useEffect(() => {
-    console.log(filterBy)
-    console.log(user)
+    console.log(isLoading)
     loadGames().then(() => {
       // setIsLoadingFalse(!isLoading)
     })
@@ -48,20 +46,8 @@ export function GameIndex() {
   }
 
   function onChangePageIdx(diff) {
-    // const maxPage = gameService.getMaxPage()
-    // console.log(maxPage)
-    // if (filterBy.pageIdx + 1 === maxPage && diff === 1) {
-    //   const newPageIdx = 0
-    //   setFilterBy({ ...filterBy, pageIdx: newPageIdx })
-    //   return
-    // }
-    // if (filterBy.pageIdx === 0 && diff === -1) return
-    // const newPageIdx = filterBy.pageIdx + diff
-    // setFilterBy({ ...filterBy, pageIdx: newPageIdx })
-    gameService.getMaxPage().then((maxPage) => {
-      console.log(maxPage)
-      console.log(filterBy.pageIdx)
-      if (filterBy.pageIdx + 1 === maxPage - 1 && diff === 1) {
+    gameService.getMaxPage(filterBy).then((maxPage) => {
+      if (filterBy.pageIdx + 1 === maxPage && diff === 1) {
         const newPageIdx = 0
         setFilterBy({ ...filterBy, pageIdx: newPageIdx })
         return
@@ -70,10 +56,21 @@ export function GameIndex() {
       const newPageIdx = filterBy.pageIdx + diff
       setFilterBy({ ...filterBy, pageIdx: newPageIdx })
     })
+    // gameService.getMaxPage().then((maxPage) => {
+    //   console.log(maxPage)
+    //   console.log(filterBy.pageIdx)
+    //   if (filterBy.pageIdx + 1 === maxPage - 1 && diff === 1) {
+    //     const newPageIdx = 0
+    //     setFilterBy({ ...filterBy, pageIdx: newPageIdx })
+    //     return
+    //   }
+    //   if (filterBy.pageIdx === 0 && diff === -1) return
+    //   const newPageIdx = filterBy.pageIdx + diff
+    //   setFilterBy({ ...filterBy, pageIdx: newPageIdx })
+    // })
   }
 
   function onSort(ev, value) {
-    console.log(value)
     const newSortBy = value.replace(' ', '')
 
     setFilterBy({ ...filterBy, sortBy: newSortBy, pageIdx: 0 })
@@ -90,6 +87,11 @@ export function GameIndex() {
 
   return (
     <section className='section-container'>
+      {isLoading && (
+        <div className='loader'>
+          <img src={loader} alt='' />
+        </div>
+      )}
       <div className='game-index-user-interface'>
         <GameFilter
           filterBy={filterBy}

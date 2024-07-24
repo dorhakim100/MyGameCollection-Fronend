@@ -19,7 +19,6 @@ export function Cart({ toggleCart, setScore }) {
   const storeCart = useSelector(
     (stateSelector) => stateSelector.userModule.shoppingCart
   )
-  console.log(storeCart)
 
   const navigate = useNavigate()
   const initialValue = 0
