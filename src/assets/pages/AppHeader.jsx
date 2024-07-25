@@ -13,7 +13,10 @@ import { SearchBar } from './SearchBar.jsx'
 import { userService } from '../../services/user.service.js'
 import { login, signup, logout } from '../../store/actions/user.actions.js'
 
-import { showErrorMsg } from '../../services/event-bus.service.js'
+import {
+  showErrorMsg,
+  showSuccessMsg,
+} from '../../services/event-bus.service.js'
 
 import icon from '/game-controller.svg'
 import Search from '@mui/icons-material/Search.js'
@@ -44,6 +47,9 @@ export function AppHeader() {
 
   function onSetUser(user) {
     setUser(user)
+    if (user === null) {
+      return
+    }
     setScore(user.score)
     navigate(`/`)
   }
@@ -60,6 +66,7 @@ export function AppHeader() {
     logout()
       .then(() => {
         onSetUser(null)
+        showSuccessMsg('Logged out')
       })
       .catch((err) => {
         showErrorMsg('OOPs try again')
@@ -121,7 +128,13 @@ export function AppHeader() {
           </button>
         )) || (
           <section className='login-container'>
-            <Link to={`/user/${user._id}`}>Hello {user.fullname}</Link>
+            <Link
+              to={`/user/${user._id}`}
+              style={{ display: 'flex', gap: '10px', alignItems: 'center' }}
+            >
+              <i class='fa-solid fa-user'></i>
+              {user.fullname}
+            </Link>
             {user && <span>{score}$</span>}
             <button onClick={onLogout}>Logout</button>
           </section>

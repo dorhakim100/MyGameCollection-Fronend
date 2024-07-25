@@ -13,7 +13,7 @@ import { showErrorMsg } from '../../services/event-bus.service.js'
 
 import { MyForm } from './MyForm.jsx'
 
-import '../css/GameEdit.css'
+// import '../css/GameEdit.css'
 
 export function GameEdit() {
   const labels = [

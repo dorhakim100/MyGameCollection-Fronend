@@ -1,16 +1,16 @@
 .app-header{
     position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
+    top: 0;
+    left: 0;
+    right: 0;
     // margin: auto 0;
-    margin-left: 0px;
-    margin-right: 0px;
+    // margin-left: 0px;
+    // margin-right: 0px;
     background-color: #1976d2;
 
 
-    max-width: 1280px;
-    margin: 0 auto;
+    // max-width: 1280px;
+    // margin: 0 auto;
     margin-bottom: 2rem;
     text-align: center;
 
@@ -44,11 +44,21 @@
             
             display: flex;
             justify-content: space-around;
-            gap: 2em;
+            gap: 1.5em;
             padding: 15px;
 
+            .active{
+                border-bottom: 01px solid var(--border);
+                color: rgb(48, 22, 114);
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+            }
+
             a{
+                padding: 5px;
                 color: white;
+                background-color: #2683e0;
+                // border: 1px solid var(--border);
+                box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;                border-radius: 5px;
             }
 
             &::after{

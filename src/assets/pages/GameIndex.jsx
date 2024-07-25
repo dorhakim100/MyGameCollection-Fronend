@@ -23,7 +23,7 @@ import { showErrorMsg } from '../../services/event-bus.service.js'
 import gameCover from '/game-cover.jpg'
 import loader from '/loader.svg'
 
-import '../css/GameIndex.css'
+// import '../css/GameIndex.css'
 import { gameService } from '../../services/game.service.js'
 import { userService } from '../../services/user.service.js'
 

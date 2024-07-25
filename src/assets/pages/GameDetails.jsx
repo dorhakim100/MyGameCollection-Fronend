@@ -14,7 +14,7 @@ import { addGameToCart } from '../../store/actions/user.actions.js'
 import gameCover from '/game-cover.jpg'
 import loader from '/loader.svg'
 
-import '../css/GameDetails.css'
+// import '../css/GameDetails.css'
 import { showSuccessMsg } from '../../services/event-bus.service.js'
 import { showErrorMsg } from '../../services/event-bus.service.js'
 import { userService } from '../../services/user.service.js'
