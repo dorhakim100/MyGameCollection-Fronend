@@ -4,11 +4,13 @@ import { useState, useRef, useEffect } from 'react'
 
 import { setFilterBy } from '../../store/actions/game.actions.js'
 import { utilService } from '../../services/util.service.js'
+import { gameService } from '../../services/game.service.js'
 
 import { UserMsg } from './UserMsg.jsx'
 import { LoginSignup } from './LoginSignup.jsx'
 import { Cart } from './Cart.jsx'
 import { SearchBar } from './SearchBar.jsx'
+import { NavBar } from './NavBar.jsx'
 
 import { userService } from '../../services/user.service.js'
 import { login, signup, logout } from '../../store/actions/user.actions.js'
@@ -20,7 +22,6 @@ import {
 
 import icon from '/game-controller.svg'
 import Search from '@mui/icons-material/Search.js'
-import { gameService } from '../../services/game.service.js'
 
 // import '../css/AppHeader.css'
 
@@ -44,6 +45,8 @@ export function AppHeader() {
   )
 
   const [cartLength, setCartLength] = useState(0)
+
+  const navBarRef = useRef()
 
   function onSetUser(user) {
     setUser(user)
@@ -73,6 +76,14 @@ export function AppHeader() {
       })
   }
 
+  function toggleNavBar() {
+    if (navBarRef.current.style.display === 'none') {
+      navBarRef.current.style.display = 'flex'
+    } else {
+      navBarRef.current.style.display = 'none'
+    }
+  }
+
   function toggleCart() {
     if (isLoginPage)
       setIsLoginPage((prevIsLoginPage) => (prevIsLoginPage = !prevIsLoginPage))
@@ -97,6 +108,7 @@ export function AppHeader() {
           filterBy={filterBy}
           debouncedSetFilter={debouncedSetFilter}
           navigate={navigate}
+          toggleNavBar={toggleNavBar}
         />
         <nav className='app-nav'>
           <NavLink to='/'>Home</NavLink>
@@ -128,12 +140,9 @@ export function AppHeader() {
           </button>
         )) || (
           <section className='login-container'>
-            <Link
-              to={`/user/${user._id}`}
-              style={{ display: 'flex', gap: '10px', alignItems: 'center' }}
-            >
+            <Link to={`/user/${user._id}`}>
               <i class='fa-solid fa-user'></i>
-              {user.fullname}
+              <span>{user.fullname}</span>
             </Link>
             {user && <span>{score}$</span>}
             <button onClick={onLogout}>Logout</button>
@@ -150,6 +159,11 @@ export function AppHeader() {
       </section>
       {isCart && <Cart toggleCart={toggleCart} setScore={setScore} />}
       <UserMsg />
+      <NavBar
+        navBarRef={navBarRef}
+        toggleCart={toggleCart}
+        toggleNavBar={toggleNavBar}
+      />
     </header>
   )
 }

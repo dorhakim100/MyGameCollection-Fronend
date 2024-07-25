@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react'
 import { setFilterBy } from '../../store/actions/game.actions.js'
 import { utilService } from '../../services/util.service.js'
 
-import { Button } from '@mui/material'
+import { Button, Autocomplete, TextField } from '@mui/material'
 import { styled, alpha } from '@mui/material/styles'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -201,8 +201,16 @@ export function GameFilter({ filterBy }) {
         </button>
         <button onClick={onClearFilter}>Clear Filter</button>
         <div className='text-container'>
-          <label htmlFor='name'>Game Title:</label>
-          <input onChange={handleChange} type='search' id='name' name='txt' />
+          {/* <label htmlFor='name'>Game Title:</label> */}
+          <Search onChange={handleChange} id='name' name='txt'>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder='Search...'
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
         </div>
         <div className='price-container'>
           <label htmlFor='price'>Max Price</label>

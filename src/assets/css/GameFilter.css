@@ -79,10 +79,10 @@
 
 .transparent-checkbox:has(input:checked) > label{
     color: var(--border);
-    background-color: var(--high-importance);
+    background-color: var(--blue);
 }
 .company-container:has(input:checked) > label{
-    background-color: var(--high-importance);
+    background-color: var(--blue);
 }
 
 .companies-container{

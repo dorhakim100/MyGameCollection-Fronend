@@ -56,7 +56,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }))
 
-export function SearchBar({ icon, navigate }) {
+export function SearchBar({ icon, navigate, toggleNavBar }) {
   const filterBy = useSelector(
     (storeSelector) => storeSelector.gameModule.filterBy
   )
@@ -132,6 +132,7 @@ export function SearchBar({ icon, navigate }) {
             color='inherit'
             aria-label='open drawer'
             sx={{ mr: 2 }}
+            onClick={toggleNavBar}
           >
             <MenuIcon />
           </IconButton>

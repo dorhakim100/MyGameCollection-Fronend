@@ -2,7 +2,7 @@ import React from 'react'
 import { Formik, Form, Field } from 'formik'
 import * as Yup from 'yup'
 
-import '../css/LoginSignun.css'
+// import '../css/LoginSignun.css'
 
 const SignupSchema = Yup.object().shape({
   username: Yup.string()

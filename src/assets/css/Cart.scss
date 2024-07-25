@@ -7,8 +7,12 @@
     border: 2px solid var(--text);
 
     height: 500px;
-    width: 400px;
+    width: 430px;
     z-index: 3;
+
+    @media (max-width:450px) {
+        width: 320px;
+    }
 
     .x-button{
         position: absolute;
@@ -24,7 +28,9 @@
         height: 300px;
         overflow-y: auto;
         /* justify-content: space-between; */
-
+        .cart-item-container{
+            display: flex;
+        }
 
         .game-in-cart-container{
             display: grid;
@@ -50,12 +56,18 @@
 
             .game-quantity{
                 width: 30px;
+                @media (max-width:450px) {
+                    display: none;
+                    }
             }
 
             img{
                 width: 50px;
                 height: auto;
                 margin: 0.5em;
+                @media (max-width:450px) {
+                display: none;
+                }
             }
 
             span{

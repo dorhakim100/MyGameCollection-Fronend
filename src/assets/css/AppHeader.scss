@@ -6,7 +6,7 @@
     // margin: auto 0;
     // margin-left: 0px;
     // margin-right: 0px;
-    background-color: #1976d2;
+    background-color: var(--blue);
 
 
     // max-width: 1280px;
@@ -18,6 +18,13 @@
         display: flex;
         align-items: center;
         justify-content: space-around;
+
+        .MuiButtonBase-root{
+            display: none;
+            @media (max-width:900px) {
+                display: flex;
+            }
+        }
 
         .search-container{
 
@@ -46,6 +53,10 @@
             justify-content: space-around;
             gap: 1.5em;
             padding: 15px;
+
+            @media (max-width:900px) {
+             display: none;   
+            }
 
             .active{
                 border-bottom: 01px solid var(--border);
@@ -78,10 +89,41 @@
             display: flex;
             align-items: center;
             justify-items: center;
-            gap: 1em;
+            gap: 1em; 
+            span{
+                    @media (max-width:500px) {
+                        
+                        display: none;
+        
+                    }
+                    
+                }
 
             a{
+                display: flex;
+                gap: 10px;
+                align-items: center;
                 color: white;
+                i,p{
+                    @media (max-width:500px) {
+                        display: none;
+                        
+                    }
+
+                }
+               
+
+            }
+            @media (max-width:505px) {
+                font-size: 0.8em;
+
+            }
+
+            button{
+                @media (max-width:400px) {
+                    font-size: 0.8em;
+                    padding: 5px;
+                }
             }
         }
         
@@ -96,6 +138,10 @@
             }
             button{
                 margin: 15px;
+            }
+
+            @media (max-width:400px) {
+                display: none;
             }
         }
         .cart-quantity{
