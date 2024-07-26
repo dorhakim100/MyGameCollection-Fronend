@@ -24,6 +24,7 @@ function getById(userId) {
 function login({ username, password }) {
   return storageService.query(STORAGE_KEY).then((users) => {
     const user = users.find((user) => user.username === username)
+    console.log(user)
     // if (user && user.password !== password) return _setLoggedinUser(user)
     if (user) return _setLoggedinUser(user)
     else return Promise.reject('Invalid login')

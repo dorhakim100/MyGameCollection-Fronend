@@ -76,7 +76,7 @@ export function GameDetails() {
       .then(() => {
         // userService.addGameToCart(game)
         showSuccessMsg('Game added')
-        navigate(`/game`)
+        // navigate(`/game`)
       })
       .catch((err) => {
         showErrorMsg(`Couldn't add game`)

@@ -7,11 +7,11 @@
     border: 2px solid var(--text);
 
     height: 500px;
-    width: 430px;
+    width: 450px;
     z-index: 3;
 
     @media (max-width:450px) {
-        width: 320px;
+        width: 340px;
     }
 
     .x-button{
