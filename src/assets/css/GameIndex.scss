@@ -23,7 +23,7 @@
     @media (max-width:800px) {
         // position: relative;
 
-        top: 5em;
+        top: 8em;
     }
 }
 
@@ -39,7 +39,7 @@
     align-items: center;
     justify-items: center;
 
-    @media (max-width:800px) {
+    @media (max-width:500px) {
         display: block;
     }
 
@@ -130,7 +130,7 @@
     left: 0;
     right: 0;
 
-    @media (max-width:800px) {
+    @media (max-width:605px) {
         position: fixed;
         display: flex;
         bottom: 0px;

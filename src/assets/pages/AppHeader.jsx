@@ -57,6 +57,14 @@ export function AppHeader() {
     navigate(`/`)
   }
 
+  useEffect(() => {
+    setUser(user)
+    if (user === null) {
+      return
+    }
+    setScore(user.score)
+  }, [])
+
   function onLogout() {
     // userService
     //   .logout()
@@ -77,10 +85,10 @@ export function AppHeader() {
   }
 
   function toggleNavBar() {
-    if (navBarRef.current.style.display === 'none') {
-      navBarRef.current.style.display = 'flex'
-    } else {
+    if (navBarRef.current.style.display === 'flex') {
       navBarRef.current.style.display = 'none'
+    } else {
+      navBarRef.current.style.display = 'flex'
     }
   }
 

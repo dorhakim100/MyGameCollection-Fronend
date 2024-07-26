@@ -10,6 +10,7 @@ import img2 from '/2.webp'
 import img3 from '/3.webp'
 
 import SlideShow from './SlideShow.jsx'
+import GamesSlideShow from './GamesSlideShow.jsx'
 
 // import Carousel from 'react-multi-carousel'
 import CustomDot from 'react-multi-carousel'
@@ -19,12 +20,24 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { setFilterBy } from '../../store/actions/game.actions.js'
+import { useEffect, useState } from 'react'
+
+import { gameService } from '../../services/game.service.js'
 
 // import '../css/Home.scss'
 
 export function Home() {
   const filterBy = useSelector((storeState) => storeState.gameModule.filterBy)
   const navigate = useNavigate()
+
+  const [randomGames, setRandomGames] = useState([])
+
+  useEffect(() => {
+    gameService.getRandomGames().then((games) => {
+      setRandomGames(games)
+      // console.log(randomGames)
+    })
+  }, [])
 
   function onSelectCompany(company) {
     setFilterBy({ ...filterBy, companies: [company], pageIdx: 0 })
@@ -57,6 +70,10 @@ export function Home() {
           alt=''
         />
       </div>
+      <Link to={`/game`}>
+        <h4>Our Games</h4>
+      </Link>
+      <GamesSlideShow randomGames={randomGames} />
     </section>
   )
 }

@@ -5,6 +5,16 @@
   text-align: center;
 }
 
+/* @media (max-width:400px) {
+  #root{
+    max-width: 100px;
+    margin: 0;
+    padding: 2rem;
+
+  }
+  
+} */
+
 
 
 .logo {
@@ -70,5 +80,3 @@
 } 
 
 
-@import '/node_modules/@fortawesome/fontawesome-free/css/all.min.css';
-@import "assets/css/main.css";
