@@ -14,6 +14,7 @@ import { GamesList } from './GamesList.jsx'
 
 import { setFilterBy } from '../../store/actions/game.actions.js'
 import { setIsLoadingFalse } from '../../store/actions/game.actions.js'
+import { setIsLoadingTrue } from '../../store/actions/game.actions.js'
 import { utilService } from '../../services/util.service.js'
 
 import { showUserMsg } from '../../services/event-bus.service.js'
@@ -46,6 +47,7 @@ export function GameIndex() {
   }
 
   function onChangePageIdx(diff) {
+    setIsLoadingTrue()
     gameService.getMaxPage(filterBy).then((maxPage) => {
       if (filterBy.pageIdx + 1 === maxPage && diff === 1) {
         const newPageIdx = 0
@@ -86,7 +88,7 @@ export function GameIndex() {
   ]
 
   return (
-    <section className='section-container'>
+    <section className='section-container game-index'>
       {isLoading && (
         <div className='loader'>
           <img src={loader} alt='' />

@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 
 import { setFilterBy } from '../../store/actions/game.actions.js'
 import { utilService } from '../../services/util.service.js'
+import { setIsLoadingTrue } from '../../store/actions/game.actions.js'
 
 import { Button, Autocomplete, TextField } from '@mui/material'
 import { styled, alpha } from '@mui/material/styles'
@@ -104,6 +105,7 @@ export function GameFilter({ filterBy }) {
   }
 
   function handleChange({ target }) {
+    setIsLoadingTrue()
     let field = target.name
     let value = target.value
     let checkedButton = target.id

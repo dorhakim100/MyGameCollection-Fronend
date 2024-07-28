@@ -51,6 +51,7 @@ export function AppHeader() {
   function onSetUser(user) {
     setUser(user)
     if (user === null) {
+      navigate(`/`)
       return
     }
     setScore(user.score)
@@ -77,6 +78,7 @@ export function AppHeader() {
     logout()
       .then(() => {
         onSetUser(null)
+
         showSuccessMsg('Logged out')
       })
       .catch((err) => {

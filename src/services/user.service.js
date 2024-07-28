@@ -1,4 +1,5 @@
 import { storageService } from './async-storage.service.js'
+import { utilService } from './util.service.js'
 
 const STORAGE_KEY = 'userDB'
 const STORAGE_KEY_LOGGEDIN = 'loggedinUser'
@@ -15,6 +16,7 @@ export const userService = {
   removeGameFromCart,
   clearCart,
   checkout,
+  setOrder,
 }
 
 function getById(userId) {
@@ -39,12 +41,12 @@ function signup({ username, password, fullname }) {
     score: 10000,
     gamesInCart: [],
     isAdmin: false,
+    orders: [],
   }
   if (user.fullname === 'Dor Hakim') user.isAdmin = true
-  return storageService.post(STORAGE_KEY, user).then(() => {
-    _setLoggedinUser(user)
-    console.log(user)
-    return user
+  return storageService.post(STORAGE_KEY, user).then((savedUser) => {
+    _setLoggedinUser(savedUser)
+    return savedUser
   })
 }
 
@@ -81,8 +83,10 @@ function _setLoggedinUser(user) {
     gamesInCart: user.gamesInCart,
     username: user.username,
     password: user.password,
+    orders: user.orders,
   }
   sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(userToSave))
+
   return userToSave
 }
 
@@ -96,11 +100,11 @@ function getEmptyCredentials() {
 
 function addGameToCart(gameToAdd) {
   const user = getLoggedinUser()
-  console.log(user)
 
   user.gamesInCart.push(gameToAdd)
 
   _setLoggedinUser({ ...user })
+
   return storageService
     .put(STORAGE_KEY, { ...user, gamesInCart: [...user.gamesInCart] })
     .then(() => {
@@ -110,9 +114,9 @@ function addGameToCart(gameToAdd) {
 
 function removeGameFromCart(gameId) {
   let user = getLoggedinUser()
-  console.log(user)
+
   user.gamesInCart = user.gamesInCart.filter((game) => game._id !== gameId)
-  console.log(user)
+
   _setLoggedinUser({ ...user })
   return storageService
     .put(STORAGE_KEY, { ...user, gamesInCart: [...user.gamesInCart] })
@@ -144,6 +148,17 @@ function checkout(newScore) {
     .then((updatedUser) => {
       return Promise.resolve(updatedUser)
     })
+}
+
+function setOrder(newOrder) {
+  let user = getLoggedinUser()
+  user.orders.push(newOrder)
+  const newUser = _setLoggedinUser({
+    ...user,
+  })
+  return storageService.put(STORAGE_KEY, { ...user }).then((updatedUser) => {
+    return Promise.resolve(updatedUser)
+  })
 }
 
 // Test Data

@@ -1,3 +1,7 @@
+.game-index{
+    // margin-top: 2em;
+}
+
 .game-index-user-interface{
     display: flex;
     justify-items: center;
@@ -6,7 +10,7 @@
     justify-content: space-around;
 
     position: absolute;
-    top: 200px;
+    top: 100px;
     left: 0px;
     right: 0px;
     .sort-container{
@@ -31,15 +35,21 @@
     max-width: 1280px;
     margin: 0 auto;
     
-    display: flex;
-    flex-wrap: wrap;
+    // display: flex;
+    // flex-wrap: wrap;
+
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    // grid-template-rows: repeat(2,300px);
+
+  
 
     gap: 25px;
 
     align-items: center;
     justify-items: center;
 
-    @media (max-width:500px) {
+    @media (max-width:650px) {
         display: block;
     }
 
@@ -50,7 +60,22 @@
         }
 
         width: 150px;
-        height: fit-content;
+        // height: 300px;
+
+        @media (max-width:650px) {
+
+            object-fit: scale-down;
+        }
+        
+
+//         display: grid;
+//         grid-template-rows: 25px auto 25px;
+//         align-items: center;
+//   a{
+//         grid-row: 2/3;
+//     }
+
+        // border: 1px solid var(--text);
     
         cursor: pointer;
      &:hover .hover-shadow{
@@ -96,6 +121,7 @@
                 // width: 50px;
                 align-self: center;
             }
+      
         }
     }
 }
