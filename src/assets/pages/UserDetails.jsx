@@ -23,7 +23,7 @@ export function UserDetails() {
   }
 
   return (
-    <section>
+    <section className='section-container user-details'>
       <h2>Hello {user && user.fullname}</h2>
       <h3>Orders</h3>
       {(orders.length === 0 && (

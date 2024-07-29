@@ -47,8 +47,22 @@ export function GameIndex() {
   }
 
   function onChangePageIdx(diff) {
+    if (filterBy.pageIdx === 0 && diff === -1) return
+
     setIsLoadingTrue()
+    // gameService.getMaxPage(filterBy).then((maxPage) => {
+    //   if (filterBy.pageIdx + 1 === maxPage && diff === 1) {
+    //     const newPageIdx = 0
+    //     setFilterBy({ ...filterBy, pageIdx: newPageIdx })
+    //     return
+    //   }
+    //   if (filterBy.pageIdx === 0 && diff === -1) return
+    //   const newPageIdx = filterBy.pageIdx + diff
+    //   setFilterBy({ ...filterBy, pageIdx: newPageIdx })
+    // })
     gameService.getMaxPage(filterBy).then((maxPage) => {
+      console.log(maxPage)
+      console.log(filterBy.pageIdx)
       if (filterBy.pageIdx + 1 === maxPage && diff === 1) {
         const newPageIdx = 0
         setFilterBy({ ...filterBy, pageIdx: newPageIdx })
@@ -58,18 +72,6 @@ export function GameIndex() {
       const newPageIdx = filterBy.pageIdx + diff
       setFilterBy({ ...filterBy, pageIdx: newPageIdx })
     })
-    // gameService.getMaxPage().then((maxPage) => {
-    //   console.log(maxPage)
-    //   console.log(filterBy.pageIdx)
-    //   if (filterBy.pageIdx + 1 === maxPage - 1 && diff === 1) {
-    //     const newPageIdx = 0
-    //     setFilterBy({ ...filterBy, pageIdx: newPageIdx })
-    //     return
-    //   }
-    //   if (filterBy.pageIdx === 0 && diff === -1) return
-    //   const newPageIdx = filterBy.pageIdx + diff
-    //   setFilterBy({ ...filterBy, pageIdx: newPageIdx })
-    // })
   }
 
   function onSort(ev, value) {
