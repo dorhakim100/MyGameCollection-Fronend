@@ -140,11 +140,11 @@ export function GameIndex() {
 
       <div className='page-container'>
         <Button variant='contained' onClick={() => onChangePageIdx(-1)}>
-          Previous
+          <i className='fa-solid fa-arrow-left'></i>
         </Button>
         <span>{filterBy.pageIdx + 1}</span>
         <Button variant='contained' onClick={() => onChangePageIdx(1)}>
-          Next
+          <i className='fa-solid fa-arrow-right'></i>
         </Button>
       </div>
     </section>

@@ -108,10 +108,6 @@ export function AppHeader() {
   return (
     <header className='app-header'>
       <section className='header-container'>
-        <div className='logo-container'>
-          {/* <h1>Game Store</h1> */}
-          {/* <img className='icon' src={icon} alt='' /> */}
-        </div>
         <SearchBar
           icon={icon}
           toggleLoginPage={toggleLoginPage}

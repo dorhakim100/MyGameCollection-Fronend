@@ -142,7 +142,7 @@ export function SearchBar({ icon, navigate, toggleNavBar }) {
             component='div'
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            <div className='logo-container'>
+            <div className='logo-container' onClick={() => navigate('/')}>
               <h1>Game Store</h1>
               <img className='icon' src={icon} alt='' />
             </div>
